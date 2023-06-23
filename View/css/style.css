@@ -363,6 +363,7 @@ button {
 }
 
 .health_taital {
+    text-align: center;
     width: 100%;
     float: left;
     font-size: 40px;
@@ -371,6 +372,7 @@ button {
 }
 
 .health_text {
+    text-align: center;
     width: 100%;
     float: left;
     font-size: 16px;
