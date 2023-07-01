@@ -4,8 +4,8 @@ class Conexion{
     define('HOST', '127.0.0.1');
     define('PORT', 1522);
     define('NAME', 'orcl');
-    define('USER', '');
-    define('PASS', '');
+    define('USER', 'ClinicaDBA');
+    define('PASS', 'clinica123');
 
     $bd_settings = " (DESCRIPTION =
      (ADDRESS = 
