@@ -211,7 +211,7 @@ button {
 }
 
 .layout_padding {
-    padding-top: 90px;
+    padding-top: 20px;
     padding-bottom: 0px;
 }
 
@@ -221,7 +221,7 @@ button {
     background-image: url(../images/banner-bg.png);
     height: auto;
     background-size: 100%;
-    padding: 10px 0px 25px 0px;
+    padding: 10px 0px 0px 0px;
     background-repeat: no-repeat;
 }
 
@@ -367,7 +367,7 @@ button {
     width: 100%;
     float: left;
     font-size: 40px;
-    color: #252525;
+    color: #212121;
     font-weight: bold;
 }
 
@@ -576,6 +576,7 @@ button {
     width: 100%;
     float: left;
     padding-bottom: 90px;
+    background-color: #ecececd7;
 }
 
 .news_section_2 {
@@ -584,20 +585,21 @@ button {
 }
 
 .box_main {
+
     width: 100%;
     float: left;
-    background-color: #252525;
-    height: auto;
+    background-color: #1becde94;
+    height: 90%;
     border-radius: 15px;
     padding: 40px;
 }
 
 .box_main:hover {
-    background-color: #1becde;
+    background-color: #035c5c;
 }
 
 .box_main.active {
-    background-color: #1becde;
+    background-color: #036161;
 }
 
 .icon_1 {
@@ -615,7 +617,7 @@ button {
     font-weight: bold;
     font-size: 24px;
     display: block;
-    color: #fff;
+    color: #221f1f;
     line-height: 30px;
 }
 
@@ -626,7 +628,7 @@ button {
     font-weight: bold;
     font-size: 24px;
     display: block;
-    color: #fff;
+    color: #272424;
     line-height: 30px;
     padding-bottom: 40px;
 }
