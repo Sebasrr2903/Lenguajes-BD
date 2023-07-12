@@ -622,7 +622,6 @@ button {
 }
 
 .daily_text_1 {
-    width: 40%;
     margin: 0 auto;
     text-align: center;
     font-weight: bold;
@@ -861,8 +860,8 @@ button {
     float: left;
     background-color: #252525;
     height: auto;
-    padding-bottom: 50px;
-    box-shadow: 0px 24px 19px -1px #222223;
+    padding-bottom: 100%;
+    box-shadow: 0px 24px ;
     position: relative;
 }
 
