@@ -28,96 +28,43 @@ GRANT CREATE SYNONYM, CREATE DATABASE LINK, RESOURCE TO ClinicaDBA;
 ------------------------------CREACIÓN DE TABLAS--------------------------------
 --Pacientes
 CREATE TABLE PACIENTES(
-            IdPaciente NUMBER PRIMARY KEY, --PK
+            IdPaciente NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             NomPaciente VARCHAR2(30),
             ApellidoPaciente VARCHAR2(40),
-            CedulaPaciente NUMBER);  
-
-INSERT INTO PACIENTES(IdPaciente, NomPaciente, ApellidoPaciente, CedulaPaciente)
-    VALUES(1,'Juan', 'Perez', 11111111);
-INSERT INTO PACIENTES(IdPaciente, NomPaciente, ApellidoPaciente, CedulaPaciente)
-    VALUES(2,'Maria', 'Lopez', 22222222);
-
---Telefono pacientes
-CREATE TABLE TELEFONO_PACIENTES(
-            IdTelefono NUMBER PRIMARY KEY, --PK
-            IdPaciente NUMBER, --FK
-            NumeroPaciente NUMBER);  
-
-ALTER TABLE TELEFONO_PACIENTES ADD CONSTRAINT FK_TELEFONOPACIENTES_PACIENTES FOREIGN KEY (IdPaciente) REFERENCES PACIENTES (IdPaciente);
-
-INSERT INTO TELEFONO_PACIENTES(IdTelefono, IdPaciente, NumeroPaciente)
-    VALUES(1, 1, 60606060);
-INSERT INTO TELEFONO_PACIENTES(IdTelefono, IdPaciente, NumeroPaciente)
-    VALUES(2, 2, 70707070);
-
---Correo pacientes
-CREATE TABLE CORREO_PACIENTES(
-            IdCorreo NUMBER PRIMARY KEY, --PK
-            IdPaciente NUMBER, --FK
+            CedulaPaciente NUMBER,
+            TelefonoPaciente NUMBER,
             CorreoPaciente VARCHAR2(60));  
 
-ALTER TABLE CORREO_PACIENTES ADD CONSTRAINT FK_CORREOPACIENTES_PACIENTES FOREIGN KEY (IdPaciente) REFERENCES PACIENTES (IdPaciente);
-
-INSERT INTO CORREO_PACIENTES(IdCorreo, IdPaciente, CorreoPaciente)
-    VALUES(1, 1, 'juan@paciente.com');
-INSERT INTO CORREO_PACIENTES(IdCorreo, IdPaciente, CorreoPaciente)
-    VALUES(2, 2, 'maria@paciente.com');
+INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente, TelefonoPaciente, CorreoPaciente)
+    VALUES('Juan', 'Perez', 11111111, 60606060, 'juan@paciente.com');
+INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente, TelefonoPaciente, CorreoPaciente)
+    VALUES('Maria', 'Lopez', 22222222, 70707070, 'maria@paciente.com');
 
 SELECT * FROM PACIENTES;
-SELECT * FROM TELEFONO_PACIENTES;
-SELECT * FROM CORREO_PACIENTES;
-
 
 --Empleados
 CREATE TABLE EMPLEADOS(
-            IdEmpleado NUMBER PRIMARY KEY, --PK
+            IdEmpleado NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             NomEmpleado VARCHAR2(30),
             ApellidoEmpleado VARCHAR2(40),
             CedulaEmpleado NUMBER,
-            RolEmpleado VARCHAR2(25)); --Medico, Secretario, Reumatologo
+            RolEmpleado VARCHAR2(25),--Medico, Secretario, Reumatologo
+            TelefonoEmpleado NUMBER,
+            CorreoEmpleado VARCHAR2(60)); 
 
-INSERT INTO EMPLEADOS(IdEmpleado, NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado)
-    VALUES(1,'Carlos', 'Solano', 33333333, 'Secretario');
-INSERT INTO EMPLEADOS(IdEmpleado, NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado)
-    VALUES(2,'Marta', 'Rodrigues', 44444444, 'Enfermera');
-
---Telefono empleados
-CREATE TABLE TELEFONO_EMPLEADOS(
-            IdTelefono NUMBER PRIMARY KEY, --PK
-            IdEmpleado NUMBER, --FK
-            NumeroEmpleado NUMBER);  
-
-ALTER TABLE TELEFONO_EMPLEADOS ADD CONSTRAINT FK_TELEFONOEMPLEADOS_EMPLEADOS FOREIGN KEY (IdEmpleado) REFERENCES EMPLEADOS (IdEmpleado);
-
-INSERT INTO TELEFONO_EMPLEADOS(IdTelefono, IdEmpleado, NumeroEmpleado)
-    VALUES(2, 1, 80808080);
-INSERT INTO TELEFONO_EMPLEADOS(IdTelefono, IdEmpleado, NumeroEmpleado)
-    VALUES(2, 2, 90909090);
-
---Correo empleados
-CREATE TABLE CORREO_EMPLEADOS(
-            IdCorreo NUMBER PRIMARY KEY, --PK
-            IdEmpleado NUMBER, --FK
-            CorreoEmpleado VARCHAR2(60));  
-
-ALTER TABLE CORREO_EMPLEADOS ADD CONSTRAINT FK_CORREOEMPLEADOS_EMPLEADOS FOREIGN KEY (IdEmpleado) REFERENCES EMPLEADOS (IdEmpleado);
-
-INSERT INTO CORREO_EMPLEADOS(IdCorreo, IdEmpleado, CorreoEmpleado)
-    VALUES(1, 1, 'carlos@empleado.com');
-INSERT INTO CORREO_EMPLEADOS(IdCorreo, IdEmpleado, CorreoEmpleado)
-    VALUES(2, 2, 'marta@empleado.com');
+INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado, TelefonoEmpleado, CorreoEmpleado)
+    VALUES('Carlos', 'Solano', 33333333, 'Secretario', 80808080, 'carlos@empleado.com');
+INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado, TelefonoEmpleado, CorreoEmpleado)
+    VALUES('Marta', 'Rodrigues', 44444444, 'Enfermera', 90909090, 'marta@empleado.com');
 
 SELECT * FROM EMPLEADOS;
-SELECT * FROM TELEFONO_EMPLEADOS;
-SELECT * FROM CORREO_EMPLEADOS;
 
 
 --Servicios
 CREATE TABLE SERVICIOS(
             IdServicio NUMBER PRIMARY KEY, --PK
             NomServicio VARCHAR2(30),
-            DescServicio VARCHAR2(90)); 
+            DescServicio VARCHAR2(100)); 
             
 --Servicios asociados a cirugias(transplantes...) se usan los codigos 100...
 --Servicios basicos como limpiezas, vendajes... se usan los codigos 200...
@@ -136,7 +83,7 @@ SELECT * FROM SERVICIOS;
 
 --Citas
 CREATE TABLE CITAS(
-            IdCita NUMBER PRIMARY KEY, --PK
+            IdCita NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             IdPaciente NUMBER, --FK
             IdEmpleado NUMBER, --FK
             IdServicio NUMBER, --FK
@@ -147,46 +94,46 @@ ALTER TABLE CITAS ADD CONSTRAINT FK_IDPACIENTE_PACIENTES FOREIGN KEY (IdPaciente
 ALTER TABLE CITAS ADD CONSTRAINT FK_IDEMPLEADO_EMPLEADOS FOREIGN KEY (IdEmpleado) REFERENCES EMPLEADOS (IdEmpleado);
 ALTER TABLE CITAS ADD CONSTRAINT FK_IDSERVICIO_SERVICIOS FOREIGN KEY (IdServicio) REFERENCES SERVICIOS (IdServicio);
 
-INSERT INTO CITAS(IdCita, IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
-    VALUES(1, 1, 2, 201, TO_DATE('15/08/23', 'DD/MM/YY'), 'Atendida');
-INSERT INTO CITAS(IdCita, IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
-    VALUES(2, 2, 2, 202, TO_DATE('03/05/23', 'DD/MM/YY'), 'Pendiente');
+INSERT INTO CITAS(IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
+    VALUES(1, 2, 201, TO_DATE('15/08/23', 'DD/MM/YY'), 'Atendida');
+INSERT INTO CITAS(IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
+    VALUES(2, 2, 202, TO_DATE('03/05/23', 'DD/MM/YY'), 'Pendiente');
 
 SELECT * FROM CITAS;
 
 
 --Diagnosticos
 CREATE TABLE DIAGNOSTICOS(
-            IdDiagnostico NUMBER PRIMARY KEY,
+            IdDiagnostico NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             IdCita NUMBER, --FK
-            DescDiagnostico VARCHAR2(90));
+            DescDiagnostico VARCHAR2(100));
 
 ALTER TABLE DIAGNOSTICOS ADD CONSTRAINT FK_IDCITA_CITAS FOREIGN KEY (IdCita) REFERENCES CITAS (IdCita);
 
-INSERT INTO DIAGNOSTICOS(IdDiagnostico, IdCita, DescDiagnostico)
-    VALUES(1, 1, 'El paciente contaba una herida en el antebrazo, se limpió la infección y se vendó la zona.');
+INSERT INTO DIAGNOSTICOS(IdCita, DescDiagnostico)
+    VALUES(1, 'El paciente contaba una herida en el antebrazo, se limpió la infección y se vendó la zona.');
 
 SELECT * FROM DIAGNOSTICOS;
 
 
 --Medicamentos
 CREATE TABLE MEDICAMENTOS(
-            IdMedicamento NUMBER PRIMARY KEY,
+            IdMedicamento NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             NomMedicamento VARCHAR2(40),
-            DescMedicamento VARCHAR2(90),
+            DescMedicamento VARCHAR2(100),
             CostoMedicamento NUMBER);
 
-INSERT INTO MEDICAMENTOS(IdMedicamento, NomMedicamento, DescMedicamento, CostoMedicamento)
-    VALUES(1, 'Amoxicilina 10mg', 'Antibiotico utilizado para tratar infecciones', 800);
-INSERT INTO MEDICAMENTOS(IdMedicamento, NomMedicamento, DescMedicamento, CostoMedicamento)
-    VALUES(2, 'Paracetamol 500mg', 'Analgésico empleado para tratar el dolor leve.', 300);
+INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
+    VALUES('Amoxicilina 10mg', 'Antibiotico utilizado para tratar infecciones', 800);
+INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
+    VALUES('Paracetamol 500mg', 'Analgésico empleado para tratar el dolor leve.', 300);
 
 SELECT * FROM MEDICAMENTOS;
 
 
 --Recetas
 CREATE TABLE RECETAS(
-            IdReceta NUMBER PRIMARY KEY,
+            IdReceta NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             IdDiagnostico NUMBER, --FK
             IdMedicamento NUMBER, --FK
             Cantidad NUMBER);
@@ -194,15 +141,15 @@ CREATE TABLE RECETAS(
 ALTER TABLE RECETAS ADD CONSTRAINT FK_IDDIAGNOSTICO_DIAGNOSTICOS FOREIGN KEY (IdDiagnostico) REFERENCES DIAGNOSTICOS (IdDiagnostico);
 ALTER TABLE RECETAS ADD CONSTRAINT FK_IDMEDICAMENTO_MEDICAMENTOS FOREIGN KEY (IdMedicamento) REFERENCES MEDICAMENTOS (IdMedicamento);
 
-INSERT INTO RECETAS(IdReceta, IdDiagnostico, IdMedicamento, Cantidad)
-    VALUES(1, 1, 1, 10);
+INSERT INTO RECETAS(IdDiagnostico, IdMedicamento, Cantidad)
+    VALUES(1, 1, 10);
 
 SELECT * FROM RECETAS;
 
 
 --Facturas
 CREATE TABLE FACTURAS(
-            IdFactura NUMBER PRIMARY KEY,
+            IdFactura NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
             IdCita NUMBER, --FK  Esto contiene al Medico, Paciente y servicio asociados
             IdReceta NUMBER, --FK
             CostoAdicional NUMBER,
@@ -211,133 +158,11 @@ CREATE TABLE FACTURAS(
 ALTER TABLE FACTURAS ADD CONSTRAINT FK_IDCITA_FACTURAS FOREIGN KEY (IdCita) REFERENCES CITAS (IdCita);
 ALTER TABLE FACTURAS ADD CONSTRAINT FK_IDRECETA_FACTURAS FOREIGN KEY (IdReceta) REFERENCES RECETAS (IdReceta);
 
-INSERT INTO FACTURAS(IdFactura, IdCita, IdReceta, CostoAdicional, Total)
-    VALUES(1, 1, 1, 50000, 58000);
+INSERT INTO FACTURAS(IdCita, IdReceta, CostoAdicional, Total)
+    VALUES(1, 1, 50000, 58000);
 
 SELECT * FROM FACTURAS;
 
-
-----------------------------CREACIÓN DE TRIGGERS--------------------------------
---Triggers para autoasignar valores al id:
---Pacientes
-CREATE OR REPLACE TRIGGER AutoIncrement_PacientesPK 
-  BEFORE INSERT ON PACIENTES
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdPaciente),0) + 1
-    INTO :NEW.IdPaciente
-    FROM PACIENTES;
-END;
-
-CREATE OR REPLACE TRIGGER AutoIncrement_TelPacientesPK 
-  BEFORE INSERT ON TELEFONO_PACIENTES
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdTelefono),0) + 1
-    INTO :NEW.IdTelefono
-    FROM TELEFONO_PACIENTES;
-END;
-
-CREATE OR REPLACE TRIGGER AutoIncrement_CorreoPacientesPK 
-  BEFORE INSERT ON CORREO_PACIENTES
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdCorreo),0) + 1
-    INTO :NEW.IdCorreo
-    FROM CORREO_PACIENTES;
-END;
-
---Empleados
-CREATE OR REPLACE TRIGGER AutoIncrement_EmpleadosPK 
-  BEFORE INSERT ON EMPLEADOS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdEmpleado),0) + 1
-    INTO :NEW.IdEmpleado
-    FROM EMPLEADOS;
-END;
-
-CREATE OR REPLACE TRIGGER AutoIncrement_TelEmpleadosPK 
-  BEFORE INSERT ON TELEFONO_EMPLEADOS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdTelefono),0) + 1
-    INTO :NEW.IdTelefono
-    FROM TELEFONO_EMPLEADOS;
-END;
-
-CREATE OR REPLACE TRIGGER AutoIncrement_CorreoEmpleadosPK 
-  BEFORE INSERT ON CORREO_EMPLEADOS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdCorreo),0) + 1
-    INTO :NEW.IdCorreo
-    FROM CORREO_EMPLEADOS;
-END;
-
---Citas
-CREATE OR REPLACE TRIGGER AutoIncrement_CitaPK 
-  BEFORE INSERT ON CITAS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdCita),0) + 1
-    INTO :NEW.IdCita
-    FROM CITAS;
-END;
-
---Diagnosticos
-CREATE OR REPLACE TRIGGER AutoIncrement_DiagnosticoPK 
-  BEFORE INSERT ON DIAGNOSTICOS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdDiagnostico),0) + 1
-    INTO :NEW.IdDiagnostico
-    FROM DIAGNOSTICOS;
-END;
-
---Medicamentos
-CREATE OR REPLACE TRIGGER AutoIncrement_MedicamentoPK 
-  BEFORE INSERT ON MEDICAMENTOS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdMedicamento),0) + 1
-    INTO :NEW.IdMedicamento
-    FROM MEDICAMENTOS;
-END;
-
---Recetas
-CREATE OR REPLACE TRIGGER AutoIncrement_RecetaPK 
-  BEFORE INSERT ON RECETAS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdReceta),0) + 1
-    INTO :NEW.IdReceta
-    FROM RECETAS;
-END;
-
---Facturas
-CREATE OR REPLACE TRIGGER AutoIncrement_FacturaPK 
-  BEFORE INSERT ON FACTURAS
-  FOR EACH ROW
-DECLARE
-BEGIN
-  SELECT NVL(MAX(IdFactura),0) + 1
-    INTO :NEW.IdFactura
-    FROM FACTURAS;
-END;
-
-/*De ahora en adelante al insertar no se deben agregar las id ya que se autoincrementan
-a excepción de los servicios ya que estos tienen un código especial*/
 
 
 -------------------------------CREACIÓN DE SP-----------------------------------
@@ -348,78 +173,34 @@ SET SERVEROUTPUT ON;
 --Pacientes
 CREATE OR REPLACE PROCEDURE AgregarPaciente(Nombre IN VARCHAR2,
                                             Apellido IN VARCHAR2,
-                                            Cedula IN NUMBER)
+                                            Cedula IN NUMBER,
+                                            Telefono IN NUMBER,
+                                            Correo IN VARCHAR2)
 AS
 BEGIN
-    INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente)
-        VALUES(Nombre, Apellido, Cedula);
+    INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente, TelefonoPaciente, CorreoPaciente)
+        VALUES(Nombre, Apellido, Cedula, Telefono, Correo);
     DBMS_OUTPUT.PUT_LINE('Paciente agregado con éxito');
 END;
 
-EXEC AgregarPaciente('Fernando', 'Perez', 55555555);
-
---Telefono pacientes
-CREATE OR REPLACE PROCEDURE AgregarTelPaciente(IDPaciente IN NUMBER,
-                                               Numero IN NUMBER)
-AS
-BEGIN
-    INSERT INTO TELEFONO_PACIENTES(IdPaciente, NumeroPaciente)
-        VALUES(IDPaciente, Numero);
-    DBMS_OUTPUT.PUT_LINE('Teléfono de paciente agregado con éxito');
-END;
-
-EXEC AgregarTelPaciente(3, 00000000);
-
---Correo pacientes
-CREATE OR REPLACE PROCEDURE AgregarCorreoPaciente(IDPaciente IN NUMBER,
-                                                  Correo IN VARCHAR2)
-AS
-BEGIN
-    INSERT INTO CORREO_PACIENTES(IdPaciente, CorreoPaciente)
-        VALUES(IDPaciente, CorreoPaciente);
-    DBMS_OUTPUT.PUT_LINE('Correo de paciente agregado con éxito');
-END;
-
-EXEC AgregarCorreoPaciente(3, 'fernando@paciente.com');
+EXEC AgregarPaciente('Fernando', 'Perez', 55555555, 51515151, 'fernando@paciente.com');
 
 
 --Empleados
 CREATE OR REPLACE PROCEDURE AgregarEmpleado(Nombre IN VARCHAR2,
                                             Apellido IN VARCHAR2,
                                             Cedula IN NUMBER,
-                                            Rol IN VARCHAR2)
+                                            Rol IN VARCHAR2,
+                                            Telefono IN NUMBER,
+                                            Correo IN VARCHAR2)
 AS
 BEGIN
-    INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado)
-    VALUES(Nombre, Apellido, Cedula, Rol);
+    INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado, TelefonoEmpleado, CorreoEmpleado)
+    VALUES(Nombre, Apellido, Cedula, Rol, Telefono, Correo);
     DBMS_OUTPUT.PUT_LINE('Empleado agregado con éxito');
 END;
 
-EXEC AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor');
-
---Telefono empleados
-CREATE OR REPLACE PROCEDURE AgregarTelEmpleado(IDEmpleado IN NUMBER,
-                                               Numero IN NUMBER)
-AS
-BEGIN
-    INSERT INTO TELEFONO_EMPLEADOS(IdEmpleado, NumeroEmpleado)
-        VALUES(IDEmpleado, Numero);
-    DBMS_OUTPUT.PUT_LINE('Teléfono de empleado agregado con éxito');
-END;
-
-EXEC AgregarTelEmpleado(3, 12344569);
-
---Correo empleados
-CREATE OR REPLACE PROCEDURE AgregarCorreoEmpleado(IDEmpleado IN NUMBER,
-                                                  Correo IN VARCHAR2)
-AS
-BEGIN
-    INSERT INTO CORREO_EMPLEADOS(IdEmpleado, CorreoEmpleado)
-        VALUES(IDEmpleado, Correo);
-    DBMS_OUTPUT.PUT_LINE('Correo de empleado agregado con éxito');
-END;
-
-EXEC AgregarCorreoEmpleado(3, 'jose@empleado.com');
+EXEC AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor', 91919191, 'jose@empleado.com');
 
 
 --Servicios
@@ -510,47 +291,230 @@ EXEC AgregarFactura(3, 2, 25000, 25850);
 
 --SP para editar
 --Pacientes
-CREATE OR REPLACE PROCEDURE EditarPaciente(IDPaciente IN NUMBER,
+CREATE OR REPLACE PROCEDURE EditarPaciente(ID IN NUMBER,
                                            Nombre IN VARCHAR2,
                                            Apellido IN VARCHAR2,
-                                           Cedula IN NUMBER)
+                                           Cedula IN NUMBER,
+                                           Telefono IN NUMBER,
+                                           Correo IN VARCHAR2)
 AS
 BEGIN
-    UPDATE PACIENTES SET NomPaciente = Nombre, ApellidoPaciente = Apellido, CedulaPaciente = Cedula
-    WHERE IdPaciente = IDPaciente;
+    UPDATE PACIENTES SET NomPaciente = Nombre, ApellidoPaciente = Apellido, CedulaPaciente = Cedula, TelefonoPaciente = Telefono, CorreoPaciente = Correo
+    WHERE IdPaciente = ID;
     DBMS_OUTPUT.PUT_LINE('Paciente editado con éxito');
 END;
 
-EXEC EditarPaciente(3, 'Fernanda', 'Castro', 55555555);
-
---Telefono pacientes
-CREATE OR REPLACE PROCEDURE EditarTelPaciente(IDTelefono IN NUMBER,
-                                              IDPaciente IN NUMBER,
-                                              Numero IN NUMBER)
-AS
-BEGIN
-    UPDATE TELEFONO_PACIENTES SET IdPaciente = IDPaciente, NumeroPaciente = Numero
-    WHERE IdTelefono = IDTelefono;
-    DBMS_OUTPUT.PUT_LINE('Teléfono de paciente editado con éxito');
-END;
-
-EXEC EditarTelPaciente(3, 3, 00000001);
-
---Correo pacientes
-CREATE OR REPLACE PROCEDURE EditarCorreoPaciente(IDCorreo IN NUMBER,
-                                                 IDPaciente IN NUMBER,
-                                                 Correo IN VARCHAR2)
-AS
-BEGIN
-    UPDATE CORREO_PACIENTES SET IdPaciente = IDPaciente, CorreoPaciente = Correo
-    WHERE IdCorreo = IDCorreo;
-    DBMS_OUTPUT.PUT_LINE('Correo de paciente editado con éxito');
-END;
-
-EXEC EditarCorreoPaciente(3, 3, 'fernanda@paciente.com');
+EXEC EditarPaciente(3, 'Fernanda', 'Castro', 55555555, 99999999, 'fernanda@paciente.com');
 
 
 --Empleados
+CREATE OR REPLACE PROCEDURE EditarEmpleado(ID IN NUMBER,
+                                           Nombre IN VARCHAR2,
+                                           Apellido IN VARCHAR2,
+                                           Cedula IN NUMBER,
+                                           Rol IN VARCHAR2,
+                                           Telefono IN NUMBER,
+                                           Correo IN VARCHAR2)
+AS
+BEGIN
+    UPDATE EMPLEADOS SET NomEmpleado = Nombre, ApellidoEmpleado = Apellido, CedulaEmpleado = Cedula,RolEmpleado = Rol, TelefonoEmpleado = Telefono, CorreoEmpleado = Correo
+    WHERE IdEmpleado = ID;
+    DBMS_OUTPUT.PUT_LINE('Empleado editado con éxito');
+END;
+
+EXEC EditarEmpleado(3,'Juan', 'Alpizar', 99999911, 'Doctor', 91919192, 'juan@empleado.com');
+
+
+--Servicios
+CREATE OR REPLACE PROCEDURE EditarServicio(ID IN NUMBER,
+                                           Nombre IN VARCHAR2,
+                                           Descripcion IN VARCHAR2)
+AS
+BEGIN
+    UPDATE SERVICIOS SET NomServicio = Nombre, DescServicio = Descripcion
+    WHERE IdServicio = ID;
+    DBMS_OUTPUT.PUT_LINE('Servicio editado con éxito');
+END;
+
+EXEC EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presión en los dientes.');
+
+
+--Citas
+CREATE OR REPLACE PROCEDURE EditarCita(ID IN NUMBER,
+                                       IDPa IN NUMBER,
+                                       IDEm IN NUMBER,
+                                       IDSer IN NUMBER,
+                                       Fecha IN VARCHAR2, --Luego se convierte a tipo date
+                                       Estado IN VARCHAR2)
+AS
+BEGIN
+    UPDATE CITAS SET IdPaciente = IDPa, IdEmpleado = IDEm, IdServicio = IDSer, FechaCita = TO_DATE(Fecha, 'DD/MM/YY'), EstadoCita = Estado
+    WHERE IdCita = ID;
+    DBMS_OUTPUT.PUT_LINE('Cita editada con éxito');
+END;
+
+EXEC EditarCita(3, 2, 3, 300, '02/06/23', 'Atendida');
+
+
+--Diagnosticos
+CREATE OR REPLACE PROCEDURE EditarDiagnostico(ID IN NUMBER,
+                                              IDCit IN NUMBER,
+                                              Descripcion IN VARCHAR2)
+AS
+BEGIN
+    UPDATE DIAGNOSTICOS SET IdCita = IDCit, DescDiagnostico = Descripcion
+    WHERE IdDiagnostico = ID;
+    DBMS_OUTPUT.PUT_LINE('Diagnostico editado con éxito');
+END;
+
+EXEC EditarDiagnostico(2, 3, 'Paciente sin caries, se realizó limpieza con éxito.');
+
+
+--Medicamentos
+CREATE OR REPLACE PROCEDURE EditarMedicamento(ID IN NUMBER,
+                                              Nombre IN VARCHAR2,                             
+                                              Descripcion IN VARCHAR2,
+                                              Costo IN NUMBER)
+AS
+BEGIN
+    UPDATE MEDICAMENTOS SET NomMedicamento = Nombre, DescMedicamento = Descripcion, CostoMedicamento = Costo
+    WHERE IdMedicamento = ID;
+    DBMS_OUTPUT.PUT_LINE('Medicamento editado con éxito');
+END;
+
+EXEC EditarMedicamento(3, 'Ibuprofeno 400mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 420);
+
+
+--Recetas
+CREATE OR REPLACE PROCEDURE EditarReceta(ID IN NUMBER,
+                                         IDDiag IN NUMBER,                             
+                                         IDMed IN NUMBER,
+                                         Cant IN NUMBER)
+AS
+BEGIN
+    UPDATE RECETAS SET IdDiagnostico = IDDiag, IdMedicamento = IDMed, Cantidad = Cant
+    WHERE IdReceta = ID;
+    DBMS_OUTPUT.PUT_LINE('Receta editada con éxito');
+END;
+
+EXEC EditarReceta(2, 2, 3, 4);
+
+
+--Facturas
+CREATE OR REPLACE PROCEDURE EditarFactura(ID IN NUMBER,
+                                          IDCit IN NUMBER,                             
+                                          IDRec IN NUMBER,
+                                          CostoAd IN NUMBER,
+                                          Tot IN NUMBER)
+AS
+BEGIN
+    UPDATE FACTURAS SET IdCita = IDCit, IdReceta = IDRec, CostoAdicional = CostoAd, Total = Tot
+    WHERE IdFactura = ID;
+    DBMS_OUTPUT.PUT_LINE('Factura editada con éxito');
+END;
+
+EXEC EditarFactura(2, 3, 2, 27000, 27850);
+
+
+--SP para eliminar
+--Pacientes
+CREATE OR REPLACE PROCEDURE EliminarPaciente(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM PACIENTES
+    WHERE IdPaciente = ID;
+    DBMS_OUTPUT.PUT_LINE('Paciente eliminado con éxito');
+END;
+
+EXEC EliminarPaciente();
+
+
+--Empleados
+CREATE OR REPLACE PROCEDURE EliminarEmpleado(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM EMPLEADOS
+    WHERE IdEmpleado = ID;
+    DBMS_OUTPUT.PUT_LINE('Empleado eliminado con éxito');
+END;
+
+EXEC EliminarEmpleado();
+
+
+--Servicios
+CREATE OR REPLACE PROCEDURE EliminarServicio(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM SERVICIOS
+    WHERE IdServicio = ID;
+    DBMS_OUTPUT.PUT_LINE('Servicio eliminado con éxito');
+END;
+
+EXEC EliminarServicio();
+
+
+--Citas
+CREATE OR REPLACE PROCEDURE EliminarCita(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM CITAS
+    WHERE IdCita = ID;
+    DBMS_OUTPUT.PUT_LINE('Cita eliminida con éxito');
+END;
+
+EXEC EliminarCita();
+
+
+--Diagnosticos
+CREATE OR REPLACE PROCEDURE EliminarDiagnostico(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM DIAGNOSTICOS 
+    WHERE IdDiagnostico = ID;
+    DBMS_OUTPUT.PUT_LINE('Diagnostico eliminado con éxito');
+END;
+
+EXEC EliminarDiagnostico();
+
+
+--Medicamentos
+CREATE OR REPLACE PROCEDURE EliminarMedicamento(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM MEDICAMENTOS
+    WHERE IdMedicamento = ID;
+    DBMS_OUTPUT.PUT_LINE('Medicamento eliminado con éxito');
+END;
+
+EXEC EliminarMedicamento();
+
+
+--Recetas
+CREATE OR REPLACE PROCEDURE EliminarReceta(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM RECETAS 
+    WHERE IdReceta = ID;
+    DBMS_OUTPUT.PUT_LINE('Receta eliminada con éxito');
+END;
+
+EXEC EliminarReceta();
+
+
+--Facturas
+CREATE OR REPLACE PROCEDURE EliminarFactura(ID IN NUMBER)
+AS
+BEGIN
+    DELETE FROM FACTURAS
+    WHERE IdFactura = ID;
+    DBMS_OUTPUT.PUT_LINE('Factura eliminada con éxito');
+END;
+
+EXEC EliminarFactura();
+
+
+------------------------------CREACIÓN DE VISTAS--------------------------------
+
 
 
 

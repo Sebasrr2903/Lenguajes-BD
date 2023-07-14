@@ -59,6 +59,9 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
                         <input type="text" class="Email_text" placeholder="Apellido" name="Apellido">
                         <input type="text" class="Email_text" placeholder="Rol" name="Rol">
                         <input type="text" class="Email_text" placeholder="Cédula" name="Cedula">
+                        <input type="email" class="Email_text" placeholder="Email" name="Correo">
+                        <input type="tel" class="Email_text" placeholder="Telefono" name="Telefono">
+                        
                         <div style="text-align: center; padding: 10px;">
                            <button type="submit" class="btn btn-outline-info btn-lg px-5"
                               style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px;"

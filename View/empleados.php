@@ -54,6 +54,8 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
                            <th>Nombre</th>
                            <th>Apellido</th>
                            <th>Puesto</th>
+                           <th>Telefono</th>
+                           <th>Correo</th>
                            <th></th>
 
                         </tr>

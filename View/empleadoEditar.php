@@ -1,6 +1,27 @@
 <?php
 include_once 'generales.php';
 include_once __DIR__ . '\..\Controller\EmpleadoController.php';
+include_once __DIR__ . '/../Model/ConnBD.php';
+
+$conex = new Conexion(); 
+$getConection= $conex-> Conectar(); 
+ 
+$ci=$_GET['q']; 
+$sql="select*from EMPLEADOS where  IdEmpleado=$ci"; 
+$stmt=$getConection-> prepare($sql);
+ $stmt-> execute(); 
+ while($row=$stmt->fetch(PDO::FETCH_ASSOC)){ 
+   $IdEmp=$row['idempleado']; 
+   $NombreEmp=$row['nomempleado']; 
+   $ApellidoEmp=$row['apellidoempleado']; 
+   $TelefonoEmp=$row['telefonoempleado']; 
+   $CedulaEmp=$row['cedulaempleado']; 
+   $CorreoEmp=$row['correoempleado']; 
+   $PuestoEmp=$row['rolempleado']; 
+  
+
+}
+
 ?>
 
 
@@ -55,10 +76,13 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
                   <div class="contact_box">
                      <form action="" method="post">
                         <h1 class="book_text">Editar la información del usuario</h1>
-                        <input type="text" class="Email_text" placeholder="Nombre" name="nombre_emp" value="<?php echo $NombreEmp?>">
-                        <input type="text" class="Email_text" placeholder="Apellido" name="apellido_emp" value="<?php echo $ApellidoEmp?>">
-                        <input type="text" class="Email_text" placeholder="Rol" name="rol_emp" value="<?php echo $PuestoEmp?>">
-                        <input type="text" class="Email_text" placeholder="Cédula" name="cedula_emp" value="<?php echo $CedulaEmp?>">
+                        <input type="hidden" value="<?php echo $IdEmp?>"name="ID">
+                        <input type="text" class="Email_text" placeholder="Nombre" name="Nombre" value="<?php echo $NombreEmp?>">
+                        <input type="text" class="Email_text" placeholder="Apellido" name="Apellido" value="<?php echo $ApellidoEmp?>">
+                        <input type="text" class="Email_text" placeholder="Rol" name="Rol" value="<?php echo $PuestoEmp?>">
+                        <input type="text" class="Email_text" placeholder="Cédula" name="Cedula" value="<?php echo $CedulaEmp?>">
+                        <input type="tel" class="Email_text" placeholder="Telefono" name="Telefono" value="<?php echo $TelefonoEmp?>">
+                        <input type="email" class="Email_text" placeholder="Correo" name="Correo" value="<?php echo $CorreoEmp?>">
                         <div style="text-align: center; padding: 10px;">
                            <button type="submit" class="btn btn-outline-info btn-lg px-5"
                               style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px;"
