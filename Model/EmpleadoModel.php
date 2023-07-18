@@ -7,7 +7,7 @@ function ListarEmpleado()
 
   $getConection = $conex->Conectar();
 
-  $stmt = $getConection->prepare("SELECT*FROM EMPLEADOS");
+  $stmt = $getConection->prepare("SELECT * FROM VistaEmpleados");
   $stmt->execute();
 
   return $stmt;

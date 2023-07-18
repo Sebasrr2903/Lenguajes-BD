@@ -24,7 +24,7 @@ function Navbar(){
 
     echo '
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+       <div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
        </button>
@@ -59,7 +59,7 @@ echo '<div class="footer_section layout_padding">
 <div class="container">
   <div class="row">
     <div class="col-lg-3 col-sm-6">
-      <div class="footer_logo"><a href="index.html"><img src="images/footer-logo.png"></a></div>
+      <div class="footer_logo"><a href="index.php"><img src="images/footer-logo.png"></a></div>
       <h1 class="adderss_text">Contáctenos</h1>
       <div class="map_icon"><img src="images/map-icon.png"><span class="paddlin_left_0">123 Calle Principal, Ciudad, País</span></div>
       <div class="map_icon"><img src="images/call-icon.png"><span class="paddlin_left_0">+7586656566</span></div>
