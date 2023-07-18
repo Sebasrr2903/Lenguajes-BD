@@ -51,6 +51,4 @@ if (isset($_POST["editarEmp"])) {
 }
 
 
-
-
 ?>
