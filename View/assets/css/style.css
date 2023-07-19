@@ -41,7 +41,7 @@ td{
 
 }
 .table-wrapper{
-    max-height: 100%;
+    max-height: 500px;
     overflow-y: scroll ;
     margin: 10px;
 }
@@ -49,9 +49,6 @@ td{
     border:1px solid rgba(255, 255, 255, 0);
     margin: 40px ;
     border-radius: 20px;
-
-
-
 }
 
 th{
