@@ -44,9 +44,9 @@ include_once __DIR__ . '\..\Controller\PacienteController.php';
                   href="pacienteAgregar.php" type="button">Agregar un Paciente</a>
             </div>
 
-            <div class="row">
-               <div class="col-md-12">
-                  <table id="tbDatos" class="table table-bordered table-hover">
+            <div class="outer-wrapper">
+               <div class="table-wrapper">
+                  <table id="tbDatos" class="table table-bordered table-hover table-dark table-fixed">
                      <thead>
                         <tr>
                            <th>id</th>

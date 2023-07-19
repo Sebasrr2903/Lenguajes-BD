@@ -11,7 +11,7 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
 <head>
    <!-- basic -->
    <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
    <!-- mobile metas -->
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -44,9 +44,9 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
                   href="empleadoAgregar.php" type="button">Agregar un Empleado</a>
             </div>
 
-            <div class="row">
-               <div class="col-md-12">
-                  <table id="tbDatos" class="table table-bordered table-hover">
+            <div class="outer-wrapper">
+               <div class="table-wrapper">
+                  <table id="tbDatos" class="table table-bordered table-hover table-dark table-fixed">
                      <thead>
                         <tr>
                            <th>id</th>
@@ -56,6 +56,7 @@ include_once __DIR__ . '\..\Controller\EmpleadoController.php';
                            <th>Puesto</th>
                            <th>Telefono</th>
                            <th>Correo</th>
+                           <th></th>
                            <th></th>
 
                         </tr>

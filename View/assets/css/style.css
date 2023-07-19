@@ -27,6 +27,41 @@
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
 
+.btn{
+    color: #f1fafb;
+}
+ 
+table{
+    border: 1px solid black;
+    text-align: center;
+}
+td{
+    font-size: 18px;
+
+
+}
+.table-wrapper{
+    max-height: 100%;
+    overflow-y: scroll ;
+    margin: 10px;
+}
+.outer-wrapper{
+    border:1px solid rgba(255, 255, 255, 0);
+    margin: 40px ;
+    border-radius: 20px;
+
+
+
+}
+
+th{
+    font-size: 22px;
+    background-color: #444443;
+    position: sticky;
+    top: 0 px;
+
+}
+
 * {
     box-sizing: border-box !important;
     transition: ease all 0.5s;
@@ -73,15 +108,18 @@ h6 {
 }
 
 h1 {
-    font-size: 24px
+    font-size: 24px;
+    font-weight: bold;
 }
 
 h2 {
-    font-size: 22px
+    font-size: 28px;
+    font-weight: bold;
 }
 
 h3 {
     font-size: 18px
+    
 }
 
 h4 {
@@ -860,7 +898,7 @@ button {
     float: left;
     background-color: #252525;
     height: auto;
-    padding-bottom: 100%;
+    padding-bottom: 10%;
     box-shadow: 0px 24px ;
     position: relative;
 }

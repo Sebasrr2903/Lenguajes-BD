@@ -13,8 +13,8 @@ function PacienteLista()
         echo '<td>' . $row["cedulapaciente"] . '</td>';
         echo '<td>' . $row["telefonopaciente"] . '</td>';
         echo '<td>' . $row["correopaciente"] . '</td>';
-        echo '<td><a type="button" href="pacienteEditar.php?q=' . $row['idpaciente'] . '" class="btn btn-outline-secondary">Editar</a>';
-        echo '<td><a type="button" href="pacienteEliminar.php?id=' . $row['idpaciente'] . '"class="btn btn-outline-danger">Eliminar</a>';
+        echo '<td><a type="button" href="pacienteEditar.php?q=' . $row['idpaciente'] . '" class="btn btn-outline-secondary" style="background-color:blue;>Editar</a>';
+        echo '<td><a type="button" href="pacienteEliminar.php?id=' . $row['idpaciente'] . '"class="btn btn-outline-danger" style="background-color:red;">Eliminar</a>';
         echo '</tr>';
     }
 }

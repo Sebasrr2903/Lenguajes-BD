@@ -183,7 +183,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Paciente agregado con éxito');
 END;
 
-EXEC AgregarPaciente('Fernando', 'Perez', 55555555, 51515151, 'fernando@paciente.com');
+EXECUTE AgregarPaciente('Fernando', 'Perez', 55555555, 51515151, 'fernando@paciente.com');
 
 
 --Empleados
@@ -200,7 +200,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Empleado agregado con éxito');
 END;
 
-EXEC AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor', 91919191, 'jose@empleado.com');
+EXECUTE AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor', 91919191, 'jose@empleado.com');
 
 
 --Servicios
@@ -214,7 +214,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Servicio agregado con éxito');
 END;
 
-EXEC AgregarServicio(300, 'Limpieza bucal', 'Limpieza profunda de los dientes y muelas.');
+EXECUTE AgregarServicio(300, 'Limpieza bucal', 'Limpieza profunda de los dientes y muelas.');
 
 
 --Citas
@@ -230,7 +230,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Cita agregada con éxito');
 END;
 
-EXEC AgregarCita(3, 3, 300, '02/06/23', 'Atendida');
+EXECUTE AgregarCita(3, 3, 300, '02/06/23', 'Atendida');
 
 
 --Diagnosticos
@@ -243,7 +243,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Diagnostico agregado con éxito');
 END;
 
-EXEC AgregarDiagnostico(3, 'El paciente no tiene caries, se realizó limpieza.');
+EXECUTE AgregarDiagnostico(3, 'El paciente no tiene caries, se realizó limpieza.');
 
 
 --Medicamentos
@@ -257,7 +257,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Medicamento agregado con éxito');
 END;
 
-EXEC AgregarMedicamento('Ibuprofeo 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
+EXECUTE AgregarMedicamento('Ibuprofeo 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
 
 
 --Recetas
@@ -271,7 +271,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Receta agregada con éxito');
 END;
 
-EXEC AgregarRecetas(2, 3, 2);
+EXECUTE AgregarRecetas(2, 3, 2);
 
 
 --Facturas
@@ -286,7 +286,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Factura agregada con éxito');
 END;
 
-EXEC AgregarFactura(3, 2, 25000, 25850);
+EXECUTE AgregarFactura(3, 2, 25000, 25850);
 
 
 --SP para editar
@@ -304,7 +304,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Paciente editado con éxito');
 END;
 
-EXEC EditarPaciente(3, 'Fernanda', 'Castro', 55555555, 99999999, 'fernanda@paciente.com');
+EXECUTE EditarPaciente(3, 'Fernanda', 'Castro', 55555555, 99999999, 'fernanda@paciente.com');
 
 
 --Empleados
@@ -322,7 +322,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Empleado editado con éxito');
 END;
 
-EXEC EditarEmpleado(3,'Juan', 'Alpizar', 99999911, 'Doctor', 91919192, 'juan@empleado.com');
+EXECUTE EditarEmpleado(3,'Juan', 'Alpizar', 99999911, 'Doctor', 91919192, 'juan@empleado.com');
 
 
 --Servicios
@@ -336,7 +336,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Servicio editado con éxito');
 END;
 
-EXEC EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presión en los dientes.');
+EXECUTE EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presión en los dientes.');
 
 
 --Citas
@@ -353,7 +353,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Cita editada con éxito');
 END;
 
-EXEC EditarCita(3, 2, 3, 300, '02/06/23', 'Atendida');
+EXECUTE EditarCita(3, 2, 3, 300, '02/06/23', 'Atendida');
 
 
 --Diagnosticos
@@ -367,7 +367,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Diagnostico editado con éxito');
 END;
 
-EXEC EditarDiagnostico(2, 3, 'Paciente sin caries, se realizó limpieza con éxito.');
+EXECUTE EditarDiagnostico(2, 3, 'Paciente sin caries, se realizó limpieza con éxito.');
 
 
 --Medicamentos
@@ -382,7 +382,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Medicamento editado con éxito');
 END;
 
-EXEC EditarMedicamento(3, 'Ibuprofeno 400mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 420);
+EXECUTE EditarMedicamento(3, 'Ibuprofeno 400mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 420);
 
 
 --Recetas
@@ -397,7 +397,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Receta editada con éxito');
 END;
 
-EXEC EditarReceta(2, 2, 3, 4);
+EXECUTE EditarReceta(2, 2, 3, 4);
 
 
 --Facturas
@@ -413,7 +413,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Factura editada con éxito');
 END;
 
-EXEC EditarFactura(2, 3, 2, 27000, 27850);
+EXECUTE EditarFactura(2, 3, 2, 27000, 27850);
 
 
 --SP para eliminar
@@ -426,7 +426,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Paciente eliminado con éxito');
 END;
 
-EXEC EliminarPaciente();
+EXECUTE EliminarPaciente();
 
 
 --Empleados
@@ -438,7 +438,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Empleado eliminado con éxito');
 END;
 
-EXEC EliminarEmpleado();
+EXECUTE EliminarEmpleado();
 
 
 --Servicios
@@ -450,7 +450,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Servicio eliminado con éxito');
 END;
 
-EXEC EliminarServicio();
+EXECUTE EliminarServicio();
 
 
 --Citas
@@ -462,7 +462,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Cita eliminida con éxito');
 END;
 
-EXEC EliminarCita();
+EXECUTE EliminarCita();
 
 
 --Diagnosticos
@@ -474,7 +474,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Diagnostico eliminado con éxito');
 END;
 
-EXEC EliminarDiagnostico();
+EXECUTE EliminarDiagnostico();
 
 
 --Medicamentos
@@ -486,7 +486,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Medicamento eliminado con éxito');
 END;
 
-EXEC EliminarMedicamento();
+EXECUTE EliminarMedicamento();
 
 
 --Recetas
@@ -498,7 +498,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Receta eliminada con éxito');
 END;
 
-EXEC EliminarReceta();
+EXECUTE EliminarReceta();
 
 
 --Facturas
@@ -510,14 +510,14 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Factura eliminada con éxito');
 END;
 
-EXEC EliminarFactura();
+EXECUTE EliminarFactura();
 
 
 ------------------------------CREACIÓN DE VISTAS--------------------------------
 
 --Vista de empleados
 
-CREATE OR REPLACE VIEW VistaEmpleados AS
+CREATE VIEW VistaEmpleados AS
 SELECT IDEMPLEADO,
 CEDULAEMPLEADO,
 NOMEMPLEADO,
@@ -525,34 +525,33 @@ APELLIDOEMPLEADO,
 ROLEMPLEADO,
 TELEFONOEMPLEADO, 
 CORREOEMPLEADO
-FROM EMPLEADOS
-ORDER BY IDEMPLEADO ASC;
+FROM EMPLEADOS;
 
 --Vista de pacientes
 
-CREATE OR REPLACE VIEW VistaPacientes AS SELECT
+CREATE VIEW VistaPacientes AS SELECT
 IDPACIENTE,
 CEDULAPACIENTE,
 NOMPACIENTE,
 APELLIDOPACIENTE,
 TELEFONOPACIENTE,
 CORREOPACIENTE
-FROM PACIENTES
-ORDER BY IDPACIENTE ASC;
+FROM PACIENTES;
 
 --Vista de recetas
 
-CREATE OR REPLACE VIEW VistaRecetas AS
-SELECT R.IDRECETA, P.NOMPACIENTE, P.APELLIDOPACIENTE, D.DESCDIAGNOSTICO, M.NOMMEDICAMENTO, R.CANTIDAD
+CREATE VIEW VistaRecetas AS
+SELECT R.IDRECETA, P.NOMPACIENTE, P.APELLIDOPACIENTE, D.DESCDIAGNOSTICO, M.NOMMEDICAMENTO
 FROM RECETAS R
 JOIN DIAGNOSTICOS D ON R.IDDIAGNOSTICO = D.IDDIAGNOSTICO
 JOIN MEDICAMENTOS M ON M.IDMEDICAMENTO = R.IDMEDICAMENTO JOIN CITAS C ON C.IDCITA=D.IDCITA
-JOIN PACIENTES P ON P.IDPACIENTE=C.IDPACIENTE
-ORDER BY R.IDRECETA ASC;
+JOIN PACIENTES P ON P.IDPACIENTE=C.IDPACIENTE;
 
 --Vista de citas
 
 CREATE VIEW VistaCitas AS
 SELECT C.IDCITA, P.NOMPACIENTE, P.APELLIDOPACIENTE, C.FECHACITA, C.ESTADOCITA
 FROM CITAS C JOIN PACIENTES P ON C.IDPACIENTE=P.IDPACIENTE;
+
+
 

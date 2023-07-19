@@ -85,10 +85,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     value="<?php echo $telefonoPaciente ?>">
                                 <input type="email" class="Email_text" placeholder="Correo" name="Correo"
                                     value="<?php echo $correoPaciente ?>">
-                                <div style="text-align: center; padding: 10px;">
+                                <div style="text-align: center; padding: 15px;">
+                                    <button type="reset" class="btn btn-outline-info btn-lg px-5"
+                                        style="background-color: grey ; padding: 5px 15px; margin-top: 10px; margin:15px;"><a
+                                            style="color: white;">Restaurar</a></button>
+
                                     <button type="submit" class="btn btn-outline-info btn-lg px-5"
-                                        style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px;"
-                                        name="editarPaciente"><a style="color: white;">Confirmar</a></button>
+                                        style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px; margin:10px;"
+                                        name="editarEmp"><a style="color: white;">Confirmar</a></button>
                                 </div>
                             </form>
 
