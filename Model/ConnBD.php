@@ -2,7 +2,7 @@
 class Conexion{
     public function Conectar(){
     define('HOST', '127.0.0.1');
-    define('PORT', 1522);
+    define('PORT', 1521);
     define('NAME', 'orcl');
     define('USER', 'ClinicaDBA');
     define('PASS', 'clinica123');
