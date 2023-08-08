@@ -15,7 +15,7 @@ function Empleadolista()
     echo '<td>' . $row["telefonoempleado"] . '</td>';
     echo '<td>' . $row["correoempleado"] . '</td>';
     echo '<td><a type="button" href="empleadoEditar.php?q=' . $row['idempleado'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';
-    echo '<td><a type="button" href="empleadoEleminar.php?id=' . $row['idempleado'] . '"class="btn btn-outline-danger" style="background-color:red;" >Eliminar</a>';
+    echo '<td><a type="button" href="empleadoEliminar.php?id=' . $row['idempleado'] . '"class="btn btn-outline-danger" style="background-color:red;" >Eliminar</a>';
     echo '</tr>';
   }
 }

@@ -57,7 +57,7 @@ include_once 'generales.php';
                </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-               <a>
+            <a href="citas.php">
                   <div class="box_main">
                      <div class="icon_1"><img src="images/icons8-lista-corta-100.png"></div>
                      <h4 class="daily_text_1">Citas</h4>

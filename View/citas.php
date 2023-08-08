@@ -1,6 +1,6 @@
 <?php
 include_once 'generales.php';
-include_once __DIR__ . '\..\Controller\PacienteController.php';
+include_once __DIR__ . '\..\Controller\CitaController.php';
 ?>
 
 
@@ -37,11 +37,11 @@ include_once __DIR__ . '\..\Controller\PacienteController.php';
       <div class="templatemo-content">
 
          <div class="templatemo-panels">
-            <h2 style="text-align: center; color: black;">Tabla de Pacientes <img src="images/icons8-paciente-70.png">
+            <h2 style="text-align: center; color: black;">Tabla de Citas <img src="images/icons8-lista-corta-100.png">
             </h2>
             <div style="text-align: center;">
                <a style="align-items: center; background-color: #252525; color:white; " class="btn btn-outline-info c"
-                  href="pacienteAgregar.php" type="button">Agregar un Paciente</a>
+                  href="citasAgregar.php" type="button">Agregar una cita</a>
             </div>
 
             <div class="outer-wrapper">
@@ -49,20 +49,19 @@ include_once __DIR__ . '\..\Controller\PacienteController.php';
                   <table id="tbDatos" class="table table-bordered table-hover table-dark table-fixed">
                      <thead>
                         <tr>
-                           <th>id</th>
-                           <th>Nombre</th>
-                           <th>Apellido</th>
-                           <th>Cedula</th>
-                           <th>Telefono</th>
-                           <th>Correo</th>
-                           <th></th>\
+                           <th>IdCita</th>
+                           <th>Nombre del paciente</th>
+                           <th>Apellido del paciente</th>
+                           <th>Fecha</th>
+                           <th>Estado de cita</th>
+                           <th></th>
                            <th></th>
 
                         </tr>
                      </thead>
                      <tbody>
                         <?php
-                        PacienteLista();
+                        CitaLista();
                         ?>
                      </tbody>
                   </table>
