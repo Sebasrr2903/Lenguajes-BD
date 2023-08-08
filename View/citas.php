@@ -52,8 +52,8 @@ include_once __DIR__ . '\..\Controller\CitaController.php';
                            <th>IdCita</th>
                            <th>Nombre del paciente</th>
                            <th>Apellido del paciente</th>
-                           <th>Fecha</th>
                            <th>Estado de cita</th>
+                           <th>Fecha</th>
                            <th></th>
                            <th></th>
 

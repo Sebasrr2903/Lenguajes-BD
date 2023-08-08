@@ -24,7 +24,7 @@ if (isset($_POST["agregarCita"])) {
     $IdEmpleado= $_POST["IdEmpl"];
     $Estado= $_POST["Estado"];
     $Fecha= $_POST["Fecha"];
-    AgregarCitaModel($IdPaciente, $IdEmpleado, $IdServicio, $Estado, $Fecha);
+    AgregarCitaModel($IdPaciente, $IdEmpleado, $IdServicio,  $Fecha, $Estado);
     header("Location: citas.php");
 }
 
@@ -38,7 +38,7 @@ if (isset($_POST["editarCita"])) {
     $Fecha= $_POST["Fecha"];
 
 
-    EditarCitaModel($ID, $IdPaciente, $IdEmpleado, $IdServicio, $Estado, $Fecha);
+    EditarCitaModel($ID, $IdPaciente, $IdEmpleado, $IdServicio, $Fecha, $Estado );
     header("Location: citas.php");
 }
 

@@ -58,8 +58,8 @@ include_once __DIR__ . '\..\Controller\CitaController.php';
                         <input type="text" class="Email_text" placeholder="IdPaciente" name="IdPacien">
                         <input type="text" class="Email_text" placeholder="IdEmpl" name="IdEmpl">
                         <input type="text" class="Email_text" placeholder="IdServicio" name="IdServi">
-                        <input type="text" class="Email_text" placeholder="Estado" name="Estado">
                         <input type="Text" class="Email_text" placeholder="DD/MM/YY" name="Fecha">
+                        <input type="text" class="Email_text" placeholder="Estado" name="Estado">
                         
                         <div style="text-align: center; padding: 10px;">
                            <button type="submit" class="btn btn-outline-info btn-lg px-5"

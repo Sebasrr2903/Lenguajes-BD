@@ -10,21 +10,25 @@ function ListarCitas()
   return $stmt;
 }
 
-function AgregarCitaModel( $IdPaciente, $IdEmpleado, $IdServicio, $Estado, $Fecha)
+function AgregarCitaModel( $IdPaciente, $IdEmpleado, $IdServicio, $Fecha, $Estado)
 {
     require_once('ConnBD.php');
     $conex = new Conexion();
-
+  try{
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN AgregarCita(:IDPaciente, :IDEmpleado, :IDServicio, :Estado,:Fecha); END;");
+    $sentencia = $getConection->prepare("BEGIN AgregarCita(:IDPaciente, :IDEmpleado, :IDServicio, :Fecha, :Estado); END;");
     $sentencia->bindParam(':IDPaciente',$IdPaciente);
     $sentencia->bindParam(':IDEmpleado', $IdEmpleado);
     $sentencia->bindParam(':IDServicio',$IdServicio);
-    $sentencia->bindParam(':Estado',$Estado);
     $sentencia->bindParam(':Fecha',$Fecha);
+    $sentencia->bindParam(':Estado',$Estado);
     $sentencia->execute();
-
     return $sentencia;
+  }catch(PDOException $e){
+    echo "Error al agregar cita" . $e->getMessage();
+    return false;
+  }
+
 }
 
 function EditarCitaModel($ID, $IdPaciente, $IdEmpleado,$IdServicio,$Fecha,$Estado)
@@ -39,8 +43,7 @@ function EditarCitaModel($ID, $IdPaciente, $IdEmpleado,$IdServicio,$Fecha,$Estad
     $sentencia->bindParam(':IDEm',$IdEmpleado);
     $sentencia->bindParam(':IDSer',$IdServicio);
     $sentencia->bindParam(':Fecha',$Fecha);
-    $sentencia->bindParam(':Estado',$Estado);
+    $sentencia->bindParam(':Estado',$Estado, PDO::PARAM_STR);
     $sentencia->execute();
-
     return $sentencia;
 }
