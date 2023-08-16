@@ -66,7 +66,7 @@ include_once 'generales.php';
             </div>
             <!-- Nueva caja -->
             <div class="col-lg-4 col-sm-6">
-               <a href="nueva_pagina.php">
+               <a href="servicios.php">
                   <div class="box_main">
                      <div class="icon_1"><img src="images/icons8-servicios-100.png"></div>
                      <h4 class="daily_text_1">Servicios</h4>
