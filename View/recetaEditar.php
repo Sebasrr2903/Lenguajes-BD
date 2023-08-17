@@ -7,13 +7,14 @@ $conex = new Conexion();
 $getConection = $conex->Conectar();
 
 $ci = $_GET['q'];
-$sql = "select*from Servicios where  Idservicio=$ci";
+$sql = "select*from Recetas where  IdReceta=$ci";
 $stmt = $getConection->prepare($sql);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $idServicios= $row['idservicio'];
-    $idpaciente = $row['nomservicio'];
-    $idempleado= $row['descservicio'];
+    $idreceta = $row['idreceta'];
+    $iddiagno = $row['iddiagnostico'];
+    $idmedi = $row['idmedicamento'];
+    $cantidad = $row['cantidad'];
 
 }
 
@@ -32,7 +33,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Servicios</title>
+    <title>Recetas</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -50,17 +51,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         ?>
     <div class="contact_section layout_padding">
         <div class="container">
-            <h2 class="health_taital">Editar Servicios</h2>
+            <h2 class="health_taital">Editar Recetas</h2>
             <div class="news_section_2">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="icon_main">
                             <div class="icon_7"><img src="images/icon-7.png"></div>
-                            <h4 class="diabetes_text">Editar la informacion del Servicios</h4>
+                            <h4 class="diabetes_text">Editar la informacion del Recetas</h4>
                         </div>
                         <div class="icon_main">
                             <div class="icon_7"><img src="images/icon-5.png"></div>
-                            <h4 class="diabetes_text">verifica la informacion del Servicios</h4>
+                            <h4 class="diabetes_text">verifica la informacion del Recetas</h4>
                         </div>
                         <div class="icon_main">
                             <div class="icon_7"><img src="images/icon-6.png"></div>
@@ -70,15 +71,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     <div class="col-md-6">
                         <div class="contact_box">
                             <form action="" method="post">
-                                <h1 class="book_text">Editar la información del Servicios</h1>
-                                <input type="hidden" value="<?php echo $idServicios ?>" name="ID">
+                                <h1 class="book_text">Editar la información del Recetas</h1>
+                                <input type="hidden" value="<?php echo $idreceta ?>" name="ID">
 
-                                <input type="text" class="Email_text" placeholder="Nombre del Servicio" name="Nombre"
-                                    value="<?php echo $idpaciente ?>">
-                                <input type="text" class="Email_text" placeholder="Descripcion" name="Descri"
-                                    value="<?php echo $idempleado ?>">
-                               
-                    
+                                <input type="text" class="Email_text" placeholder="Id del diagnostico" name="IdDiagno"
+                                    value="<?php echo $iddiagno ?>">
+                                <input type="text" class="Email_text" placeholder="Id del Medicamento" name="IdMedica"
+                                    value="<?php echo $idmedi ?>">
+                                <input type="number" class="Email_text" placeholder="Cantidad" name="Cant"
+                                    value="<?php echo $cantidad ?>">
+
+
                                 <div style="text-align: center; padding: 15px;">
                                     <button type="reset" class="btn btn-outline-info btn-lg px-5"
                                         style="background-color: grey ; padding: 5px 15px; margin-top: 10px; margin:15px;"><a
@@ -86,7 +89,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                                     <button type="submit" class="btn btn-outline-info btn-lg px-5"
                                         style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px; margin:10px;"
-                                        name="editarServicio"><a style="color: white;">Confirmar</a></button>
+                                        name="editarReceta"><a style="color: white;">Confirmar</a></button>
                                 </div>
                             </form>
 

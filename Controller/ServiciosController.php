@@ -29,7 +29,6 @@ if (isset($_POST["agregarServicio"])) {
 
 if (isset($_POST["editarServicio"])) {
     $ID = $_POST["ID"];
-    $IdServicio = $_POST["IdServi"];
     $Nombre = $_POST["Nombre"]; 
     $Descripcion = $_POST["Descri"]; 
    

@@ -57,14 +57,15 @@ include_once 'generales.php';
                </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-            <a href="citas.php">
+               <a href="citas.php">
                   <div class="box_main">
                      <div class="icon_1"><img src="images/icons8-lista-corta-100.png"></div>
                      <h4 class="daily_text_1">Citas</h4>
                   </div>
                </a>
             </div>
-            <!-- Nueva caja -->
+         </div>
+         <div class="row">
             <div class="col-lg-4 col-sm-6">
                <a href="servicios.php">
                   <div class="box_main">
@@ -74,12 +75,15 @@ include_once 'generales.php';
                </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-               <div class="box_main">
-                  <div class="icon_1"><img src="images/icons8-factura-100.png"></div>
-                  <h4 class="daily_text_1">Receta</h4>
-               </div>
+               <a href="recetas.php">
+                  <div class="box_main">
+                     <div class="icon_1"><img src="images/icons8-factura-100.png"></div>
+                     <h4 class="daily_text_1">Receta</h4>
+                  </div>
+               </a>
             </div>
             <div class="col-lg-4 col-sm-6">
+            <a href="medicamentos.php">
                <div class="box_main">
                   <div class="icon_1"><img src="images/icons8-pastillas-100.png"></div>
                   <h4 class="daily_text_1">Medicamentos</h4>
@@ -87,12 +91,19 @@ include_once 'generales.php';
             </div>
          </div>
          <div class="row justify-content-center">
-            <div class="col-lg-4 col-sm-6 ">
+         <div class="col-lg-4 col-sm-6">
                <div class="box_main">
                   <div class="icon_1"><img src="images/icons8-revisión-de-salud-100.png"></div>
                   <h4 class="daily_text_1">Diagnosticos</h4>
                </div>
             </div>
+            <div class="col-lg-4 col-sm-6">
+               <div class="box_main">
+                  <div class="icon_1"><img src="images/icons8-factura2-100.png"></div>
+                  <h4 class="daily_text_1">Factura</h4>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </div>
@@ -100,19 +111,20 @@ include_once 'generales.php';
 
 
 
-   <!-- news section end -->
-   <!-- footer section start -->
-   <?php
-   footer();
+
+      <!-- news section end -->
+      <!-- footer section start -->
+      <?php
+      footer();
 
 
-   ?>
+      ?>
 
-   <!-- copyright section end -->
-  <?php
-  Scripts();
+      <!-- copyright section end -->
+      <?php
+      Scripts();
 
-  ?>
+      ?>
 </body>
 
 </html>
