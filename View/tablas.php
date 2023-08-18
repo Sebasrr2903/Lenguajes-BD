@@ -90,20 +90,27 @@ include_once 'generales.php';
                </div>
             </div>
          </div>
+
          <div class="row justify-content-center">
-         <div class="col-lg-4 col-sm-6">
-               <div class="box_main">
-                  <div class="icon_1"><img src="images/icons8-revisión-de-salud-100.png"></div>
-                  <h4 class="daily_text_1">Diagnosticos</h4>
-               </div>
-            </div>
             <div class="col-lg-4 col-sm-6">
-               <div class="box_main">
-                  <div class="icon_1"><img src="images/icons8-factura2-100.png"></div>
-                  <h4 class="daily_text_1">Factura</h4>
-               </div>
-            </div>
-         </div>
+               <a href="diagnosticos.php">
+                  <div class="box_main">
+                     <div class="icon_1"><img src="images/icons8-revisión-de-salud-100.png"></div>
+                     <h4 class="daily_text_1">Diagnosticos</h4>
+                  </div>
+               </a>
+            </div> <!-- fin diagnosticos -->
+            <div class="col-lg-4 col-sm-6">
+               <a href="facturas.php">
+                  <div class="box_main">
+                     <div class="icon_1"><img src="images/icons8-factura2-100.png"></div>
+                     <h4 class="daily_text_1">Factura</h4>
+                  </div>
+               </a>
+            </div> <!-- fin  factura-->
+         </div> <!-- fin row 3-->
+
+         
       </div>
    </div>
 </div>
