@@ -7,8 +7,8 @@ function MedicamentoLista()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row["idmedicamento"] . '</td>';
-        echo '<td>' . $row["nommedicamento"] . '</td>';
-        echo '<td>' . $row["descmedicamento"] . '</td>';
+        echo '<td>' . utf8_encode($row["nommedicamento"]) . '</td>';
+        echo '<td>' . utf8_encode($row["descmedicamento"]) . '</td>';
         echo '<td>' . $row["costomedicamento"] . '</td>';
         echo '<td><a type="button" href="medicamentoEditar.php?q=' . $row['idmedicamento'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';
         echo '<td><a type="button" href="MedicamentoEliminar.php?id=' . $row['idmedicamento'] . '"class="btn btn-outline-danger" style="background-color:red;" >Eliminar</a>';

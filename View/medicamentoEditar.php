@@ -73,11 +73,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             <form action="" method="post">
                                 <h1 class="book_text">Editar la información del Medicamentos</h1>
                                 <input type="hidden" value="<?php echo $idMedicamento ?>" name="ID">
-
                                 <input type="text" class="Email_text" placeholder="Nombre del Medicamento" name="Nombre"
-                                    value="<?php echo $nomMedicamento  ?>">
+                                    value="<?php echo utf8_encode($nomMedicamento)  ?>">
                                 <input type="text" class="Email_text" placeholder="Descripcion" name="Descri"
-                                    value="<?php echo $descMedicamento  ?>">
+                                    value="<?php echo utf8_encode($descMedicamento)  ?>">
                                     <input type="text" class="Email_text" placeholder="Costo" name="Costo"
                                     value="<?php echo $Costo  ?>">
                     

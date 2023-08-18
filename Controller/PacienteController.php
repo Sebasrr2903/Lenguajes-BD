@@ -8,8 +8,8 @@ function PacienteLista()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row["idpaciente"] . '</td>';
-        echo '<td>' . $row["nompaciente"] . '</td>';
-        echo '<td>' . $row["apellidopaciente"] . '</td>';
+        echo '<td>' . utf8_encode($row["nompaciente"]) . '</td>';
+        echo '<td>' . utf8_encode($row["apellidopaciente"]) . '</td>';
         echo '<td>' . $row["cedulapaciente"] . '</td>';
         echo '<td>' . $row["telefonopaciente"] . '</td>';
         echo '<td>' . $row["correopaciente"] . '</td>';
@@ -38,7 +38,7 @@ if (isset($_POST["editarPaciente"])) {
     $correoPaciente = $_POST["Correo"];
 
 
-    EditarpacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente, $cedulaPaciente, $telefonoPaciente, $correoPaciente);
+    EditarPacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente, $cedulaPaciente, $telefonoPaciente, $correoPaciente);
     header("Location: pacientes.php");
 }
 

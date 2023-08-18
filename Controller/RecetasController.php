@@ -7,10 +7,10 @@ function RecetaLista()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row["idreceta"] . '</td>';
-        echo '<td>' . $row["nompaciente"] . '</td>';
-        echo '<td>' . $row["apellidopaciente"] . '</td>';
-        echo '<td>' . $row["descdiagnostico"] . '</td>';
-        echo '<td>' . $row["nommedicamento"] . '</td>';
+        echo '<td>' . utf8_encode($row["nompaciente"]) . '</td>';
+        echo '<td>' . utf8_encode($row["apellidopaciente"]) . '</td>';
+        echo '<td>' . utf8_encode($row["descdiagnostico"]) . '</td>';
+        echo '<td>' . utf8_encode($row["nommedicamento"]) . '</td>';
         echo '<td>' . $row["cantidad"] . '</td>';
         echo '<td><a type="button" href="recetaEditar.php?q=' . $row['idreceta'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';
         echo '<td><a type="button" href="recetaEliminar.php?id=' . $row['idreceta'] . '"class="btn btn-outline-danger" style="background-color:red;" >Eliminar</a>';

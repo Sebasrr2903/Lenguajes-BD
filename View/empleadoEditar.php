@@ -75,14 +75,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                <div class="col-md-6">
                   <div class="contact_box">
                      <form action="" method="post">
-                        <h1 class="book_text">Editar la información del usuario</h1>
+                        <h1 class="book_text">Editar la información del empleado</h1>
                         <input type="hidden" value="<?php echo $IdEmp ?>" name="ID">
                         <input type="text" class="Email_text" placeholder="Nombre" name="Nombre"
-                           value="<?php echo $NombreEmp ?>">
+                           value="<?php echo utf8_encode($NombreEmp) ?>">
                         <input type="text" class="Email_text" placeholder="Apellido" name="Apellido"
-                           value="<?php echo $ApellidoEmp ?>">
+                           value="<?php echo utf8_encode($ApellidoEmp) ?>">
                         <input type="text" class="Email_text" placeholder="Rol" name="Rol"
-                           value="<?php echo $PuestoEmp ?>">
+                           value="<?php echo utf8_encode($PuestoEmp) ?>">
                         <input type="text" class="Email_text" placeholder="Cédula" name="Cedula"
                            value="<?php echo $CedulaEmp ?>">
                         <input type="tel" class="Email_text" placeholder="Telefono" name="Telefono"

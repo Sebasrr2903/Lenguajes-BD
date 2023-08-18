@@ -8,10 +8,10 @@ function Empleadolista()
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
     echo '<td>' . $row["idempleado"] . '</td>';
-    echo '<td>' . $row["nomempleado"] . '</td>';
-    echo '<td>' . $row["apellidoempleado"] . '</td>';
+    echo '<td>' . utf8_encode($row["nomempleado"]) . '</td>';
+    echo '<td>' . utf8_encode($row["apellidoempleado"]) . '</td>';
     echo '<td>' . $row["cedulaempleado"] . '</td>';
-    echo '<td>' . $row["rolempleado"] . '</td>';
+    echo '<td>' . utf8_encode($row["rolempleado"]) . '</td>';
     echo '<td>' . $row["telefonoempleado"] . '</td>';
     echo '<td>' . $row["correoempleado"] . '</td>';
     echo '<td><a type="button" href="empleadoEditar.php?q=' . $row['idempleado'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';

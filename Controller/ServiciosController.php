@@ -7,8 +7,8 @@ function ServicioLista()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row["idservicio"] . '</td>';
-        echo '<td>' . $row["nomservicio"] . '</td>';
-        echo '<td>' . $row["descservicio"] . '</td>';
+        echo '<td>' . utf8_encode($row["nomservicio"]) . '</td>';
+        echo '<td>' . utf8_encode($row["descservicio"]) . '</td>';
         echo '<td><a type="button" href="servicioEditar.php?q=' . $row['idservicio'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';
         echo '<td><a type="button" href="servicioEliminar.php?id=' . $row['idservicio'] . '"class="btn btn-outline-danger" style="background-color:red;" >Eliminar</a>';
         echo '</tr>';

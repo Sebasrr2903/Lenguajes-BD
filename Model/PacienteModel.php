@@ -45,3 +45,4 @@ function EditarPacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente,$ce
     return $sentencia;
 }
 
+?>

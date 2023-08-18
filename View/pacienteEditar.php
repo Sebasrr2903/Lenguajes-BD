@@ -76,9 +76,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 <h1 class="book_text">Editar la información del paciente</h1>
                                 <input type="hidden" value="<?php echo $idPaciente ?>" name="ID">
                                 <input type="text" class="Email_text" placeholder="Nombre" name="Nombre"
-                                    value="<?php echo $nombrePaciente ?>">
+                                    value="<?php echo utf8_encode($nombrePaciente) ?>">
                                 <input type="text" class="Email_text" placeholder="Apellido" name="Apellido"
-                                    value="<?php echo $apellidoPaciente ?>">
+                                    value="<?php echo utf8_encode($apellidoPaciente) ?>">
                                 <input type="text" class="Email_text" placeholder="Cédula" name="Cedula"
                                     value="<?php echo $cedulaPaciente ?>">
                                 <input type="tel" class="Email_text" placeholder="Telefono" name="Telefono"
@@ -92,7 +92,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                                     <button type="submit" class="btn btn-outline-info btn-lg px-5"
                                         style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px; margin:10px;"
-                                        name="editarEmp"><a style="color: white;">Confirmar</a></button>
+                                        name="editarPaciente"><a style="color: white;">Confirmar</a></button>
                                 </div>
                             </form>
 

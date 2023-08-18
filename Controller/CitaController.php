@@ -7,8 +7,8 @@ function CitaLista()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row["idcita"] . '</td>';
-        echo '<td>' . $row["nompaciente"] . '</td>';
-        echo '<td>' . $row["apellidopaciente"] . '</td>';
+        echo '<td>' . utf8_encode($row["nompaciente"]) . '</td>';
+        echo '<td>' . utf8_encode($row["apellidopaciente"]) . '</td>';
         echo '<td>' . $row["estadocita"] . '</td>';
         echo '<td>' . $row["fechacita"] . '</td>';
         echo '<td><a type="button" href="citasEditar.php?q=' . $row['idcita'] . '" class="btn btn-outline-secondary" style="background-color:blue;">Editar</a>';
