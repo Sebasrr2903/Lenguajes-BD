@@ -34,7 +34,7 @@ include_once __DIR__ . '\..\Controller\FacturaController.php';
       ?>
    <div class="contact_section layout_padding">
       <div class="container">
-         <h2 class="health_taital">Agregar Pacientes</h2>
+         <h2 class="health_taital">Agregar Factura</h2>
          <div class="news_section_2">
             <div class="row">
                <div class="col-md-6">
@@ -57,9 +57,7 @@ include_once __DIR__ . '\..\Controller\FacturaController.php';
                         <h1 class="book_text">Agregue la información de la factura</h1>
                         <input type="text" class="Email_text" placeholder="Id Cita" name="IdCita">
                         <input type="text" class="Email_text" placeholder="Id Receta" name="IdReceta">
-                        <input type="text" class="Email_text" placeholder="Costo Adicional" name="CostoAdicional">
-                        <input type="text" class="Email_text" placeholder="Total" name="Total">
-                        
+                        <input type="text" class="Email_text" placeholder="Costo Adicional" name="CostoAdicional">                        
                         <div style="text-align: center; padding: 10px;">
                            <button type="submit" class="btn btn-outline-info btn-lg px-5"
                               style="background-color: #1becde ; padding: 5px 15px; margin-top: 10px;"

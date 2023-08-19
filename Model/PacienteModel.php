@@ -16,6 +16,8 @@ function AgregarPacienteModel($nombrePaciente, $apellidoPaciente, $cedulaPacient
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
+    $nombrePaciente = utf8_decode($nombrePaciente);
+    $apellidoPaciente = utf8_decode($apellidoPaciente);
     $sentencia = $getConection->prepare("BEGIN AgregarPaciente(:Nombre, :Apellido, :Cedula, :Telefono, :Correo); END;");
     $sentencia->bindParam(':Nombre',$nombrePaciente);
     $sentencia->bindParam(':Apellido',$apellidoPaciente);
@@ -32,7 +34,10 @@ function EditarPacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente,$ce
     require_once('ConnBD.php');
     $conex = new Conexion();
 
+
     $getConection = $conex->Conectar();
+    $nombrePaciente = utf8_decode($nombrePaciente);
+    $apellidoPaciente = utf8_decode($apellidoPaciente);
     $sentencia = $getConection->prepare("BEGIN EditarPaciente(:ID, :Nombre, :Apellido, :Cedula, :Telefono, :Correo ); END;");
     $sentencia->bindParam(':ID', $idPaciente);
     $sentencia->bindParam(':Nombre',$nombrePaciente);
