@@ -33,9 +33,9 @@ function Navbar(){
              <li class="nav-item active">
                 <a class="nav-link" href="index.php">Inicio</a>
              </li>
-             <li class="nav-item">
+             <!-- <li class="nav-item">
                 <a class="nav-link" href="medicine.html">Medicina</a>
-             </li>
+             </li> ESTO NO TIENE NINGUNA FUNCIONALIDAD-->
              <li class="nav-item">
                 <a class="nav-link" href="tablas.php">Tablas</a>
              </li>
