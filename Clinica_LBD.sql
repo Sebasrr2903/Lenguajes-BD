@@ -1,11 +1,11 @@
 /*Base de datos para proyecto del curso Lenguajes de Bases de Datos
-Fernando Pérez Alpízar
+Fernando PÃ©rez AlpÃ­zar
 Sebastian Rodriguez Rodriguez 
 Bryan Daniel Cantillo Aguilar  
 Tannya Granados Guerrero 
 */
 
---Creación de usuario para administración y conexión de la base de datos
+--CreaciÃ³n de usuario para administraciÃ³n y conexiÃ³n de la base de datos
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
 CREATE USER ClinicaDBA IDENTIFIED BY clinica123
@@ -17,15 +17,15 @@ ALTER USER ClinicaDBA QUOTA UNLIMITED ON USERS;
 GRANT CREATE SESSION, CREATE VIEW, ALTER SESSION, CREATE SEQUENCE TO ClinicaDBA;
 GRANT CREATE SYNONYM, CREATE DATABASE LINK, RESOURCE TO ClinicaDBA;
 
---Crear una nueva conexión con este usuario
---El tipo de conexión debe ser: Básico
+--Crear una nueva conexiÃ³n con este usuario
+--El tipo de conexiÃ³n debe ser: BÃ¡sico
 --El host debe ser: 127.0.0.1
 --El puerto debe ser: 1521
 
 --------------------------------BASE DE DATOS-----------------------------------
 --Crear con el usuario ClinicaDBA
 
-------------------------------CREACIÓN DE TABLAS--------------------------------
+------------------------------CREACIÃ“N DE TABLAS--------------------------------
 --Pacientes
 CREATE TABLE PACIENTES(
             IdPaciente NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
@@ -70,11 +70,11 @@ CREATE TABLE SERVICIOS(
 --Servicios basicos como limpiezas, vendajes... se usan los codigos 200...
 --Servicios de odontologia se usan los codigos 300...
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(100, 'Cirugia', 'Procedimiento quirúrgico, pueden presentar riesgos o complicaciones, se utiliza anestesia general.');
+    VALUES(100, 'Cirugia', 'Procedimiento quirÃºrgico, pueden presentar riesgos o complicaciones, se utiliza anestesia general.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(101, 'Cirugia Menor', 'Procedimiento quirúrgico simple, sin riesgo o complicaciones, se utiliza anestesia local.');
+    VALUES(101, 'Cirugia Menor', 'Procedimiento quirÃºrgico simple, sin riesgo o complicaciones, se utiliza anestesia local.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(201, 'Curación', 'Se realiza una limpieza a profundidad de la zona dañada por accidente o cirugía.');
+    VALUES(201, 'CuraciÃ³n', 'Se realiza una limpieza a profundidad de la zona daÃ±ada por accidente o cirugÃ­a.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
     VALUES(202, 'Costura', 'Se realiza costura y limpieza de una cortadura que presente el cliente, se aplica anestesia local.');
     
@@ -111,7 +111,7 @@ CREATE TABLE DIAGNOSTICOS(
 ALTER TABLE DIAGNOSTICOS ADD CONSTRAINT FK_IDCITA_CITAS FOREIGN KEY (IdCita) REFERENCES CITAS (IdCita);
 
 INSERT INTO DIAGNOSTICOS(IdCita, DescDiagnostico)
-    VALUES(1, 'El paciente contaba una herida en el antebrazo, se limpió la infección y se vendó la zona.');
+    VALUES(1, 'El paciente contaba una herida en el antebrazo, se limpiÃ³ la infecciÃ³n y se vendÃ³ la zona.');
 
 SELECT * FROM DIAGNOSTICOS;
 
@@ -126,7 +126,7 @@ CREATE TABLE MEDICAMENTOS(
 INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
     VALUES('Amoxicilina 10mg', 'Antibiotico utilizado para tratar infecciones', 800);
 INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
-    VALUES('Paracetamol 500mg', 'Analgésico empleado para tratar el dolor leve.', 300);
+    VALUES('Paracetamol 500mg', 'AnalgÃ©sico empleado para tratar el dolor leve.', 300);
 
 SELECT * FROM MEDICAMENTOS;
 
@@ -171,7 +171,7 @@ CREATE TABLE CONTACTO(
             Telefono NUMBER,
             Mensaje VARCHAR2(250));
 
--------------------------------CREACIÓN DE SP-----------------------------------
+-------------------------------CREACIÃ“N DE SP-----------------------------------
 --Comando para el correcto funcinamiento de bloques PL/SQL y SP
 SET SERVEROUTPUT ON;
 
@@ -186,7 +186,7 @@ AS
 BEGIN
     INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente, TelefonoPaciente, CorreoPaciente)
         VALUES(Nombre, Apellido, Cedula, Telefono, Correo);
-    DBMS_OUTPUT.PUT_LINE('Paciente agregado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Paciente agregado con Ã©xito');
 END;
 
 EXECUTE AgregarPaciente('Fernando', 'Perez', 55555555, 51515151, 'fernando@paciente.com');
@@ -203,7 +203,7 @@ AS
 BEGIN
     INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado, TelefonoEmpleado, CorreoEmpleado)
     VALUES(Nombre, Apellido, Cedula, Rol, Telefono, Correo);
-    DBMS_OUTPUT.PUT_LINE('Empleado agregado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Empleado agregado con Ã©xito');
 END;
 
 EXECUTE AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor', 91919191, 'jose@empleado.com');
@@ -217,7 +217,7 @@ AS
 BEGIN
     INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
         VALUES(IDServicio, Nombre, Descripcion);
-    DBMS_OUTPUT.PUT_LINE('Servicio agregado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Servicio agregado con Ã©xito');
 END;
 
 EXECUTE AgregarServicio(300, 'Limpieza bucal', 'Limpieza profunda de los dientes y muelas.');
@@ -233,7 +233,7 @@ AS
 BEGIN
     INSERT INTO CITAS(IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
         VALUES(IDPaciente, IDEmpleado, IDServicio, TO_DATE(Fecha, 'DD/MM/YY'), Estado);
-    DBMS_OUTPUT.PUT_LINE('Cita agregada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Cita agregada con Ã©xito');
 END;
 
 EXECUTE AgregarCita(3, 3, 300, '02/06/23', 'Atendida');
@@ -246,10 +246,10 @@ AS
 BEGIN
     INSERT INTO DIAGNOSTICOS(IdCita, DescDiagnostico)
         VALUES(IDCita, Descripcion);
-    DBMS_OUTPUT.PUT_LINE('Diagnostico agregado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Diagnostico agregado con Ã©xito');
 END;
 
-EXECUTE AgregarDiagnostico(3, 'El paciente no tiene caries, se realizó limpieza.');
+EXECUTE AgregarDiagnostico(3, 'El paciente no tiene caries, se realizÃ³ limpieza.');
 
 
 --Medicamentos
@@ -260,11 +260,10 @@ AS
 BEGIN
     INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
         VALUES(Nombre, Descripcion, Costo);
-    DBMS_OUTPUT.PUT_LINE('Medicamento agregado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Medicamento agregado con Ã©xito');
 END;
 
-EXECUTE AgregarMedicamento('Ibuprofeo 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
-
+EXECUTE AgregarMedicamento('Penicilína 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
 
 --Recetas
 CREATE OR REPLACE PROCEDURE AgregarRecetas(IDDiagnostico IN NUMBER,                             
@@ -274,7 +273,7 @@ AS
 BEGIN
     INSERT INTO RECETAS(IdDiagnostico, IdMedicamento, Cantidad)
         VALUES(IDDiagnostico, IDMedicamento, Cant);
-    DBMS_OUTPUT.PUT_LINE('Receta agregada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Receta agregada con Ã©xito');
 END;
 
 EXECUTE AgregarRecetas(2, 3, 2);
@@ -289,7 +288,7 @@ AS
 BEGIN
     INSERT INTO FACTURAS(IdCita, IdReceta, CostoAdicional, Total)
         VALUES(IDCita, IDReceta, CostoAd, Tot);
-    DBMS_OUTPUT.PUT_LINE('Factura agregada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Factura agregada con Ã©xito');
 END;
 
 EXECUTE AgregarFactura(3, 2, 25000, 25850);
@@ -303,12 +302,12 @@ AS
 BEGIN
     INSERT INTO CONTACTO(Nombre, Apellido, Telefono, Mensaje)
         VALUES(Nombre, Apellido, Telefono, Mensaje);
-    DBMS_OUTPUT.PUT_LINE('Contacto agregada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Contacto agregada con Ã©xito');
 END;
 
-EXECUTE AgregarContacto('Tannya','Granados',25557777);
+EXECUTE AgregarContacto('Tannya','Granados',25557777, 'hola');
 
-
+DESC CONTACTO;
 --SP para editar
 --Pacientes
 CREATE OR REPLACE PROCEDURE EditarPaciente(ID IN NUMBER,
@@ -321,10 +320,11 @@ AS
 BEGIN
     UPDATE PACIENTES SET NomPaciente = Nombre, ApellidoPaciente = Apellido, CedulaPaciente = Cedula, TelefonoPaciente = Telefono, CorreoPaciente = Correo
     WHERE IdPaciente = ID;
-    DBMS_OUTPUT.PUT_LINE('Paciente editado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Paciente editado con Ã©xito');
 END;
 
-EXECUTE EditarPaciente(3, 'Fernanda', 'Castro', 55555555, 99999999, 'fernanda@paciente.com');
+EXECUTE EditarPaciente(3, 'Fernanda', 'Pérez', 55555555, 99999999, 'fernanda@paciente.com');
+
 
 
 --Empleados
@@ -339,12 +339,12 @@ AS
 BEGIN
     UPDATE EMPLEADOS SET NomEmpleado = Nombre, ApellidoEmpleado = Apellido, CedulaEmpleado = Cedula,RolEmpleado = Rol, TelefonoEmpleado = Telefono, CorreoEmpleado = Correo
     WHERE IdEmpleado = ID;
-    DBMS_OUTPUT.PUT_LINE('Empleado editado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Empleado editado con Ã©xito');
 END;
 
 EXECUTE EditarEmpleado(3,'Juan', 'Alpizar', 99999911, 'Doctor', 91919192, 'juan@empleado.com');
 
-
+SELECT * FROM SERVICIOS;
 --Servicios
 CREATE OR REPLACE PROCEDURE EditarServicio(ID IN NUMBER,
                                            Nombre IN VARCHAR2,
@@ -353,10 +353,11 @@ AS
 BEGIN
     UPDATE SERVICIOS SET NomServicio = Nombre, DescServicio = Descripcion
     WHERE IdServicio = ID;
-    DBMS_OUTPUT.PUT_LINE('Servicio editado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Servicio editado con Ã©xito');
 END;
 
-EXECUTE EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presión en los dientes.');
+EXECUTE EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presiÃ³n en los dientes.');
+
 
 
 --Citas
@@ -370,7 +371,7 @@ AS
 BEGIN
     UPDATE CITAS SET IdPaciente = IDPa, IdEmpleado = IDEm, IdServicio = IDSer, FechaCita = TO_DATE(Fecha, 'DD/MM/YY'), EstadoCita = Estado
     WHERE IdCita = ID;
-    DBMS_OUTPUT.PUT_LINE('Cita editada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Cita editada con Ã©xito');
 END;
 
 EXECUTE EditarCita(3, 2, 3, 300, '02/06/23', 'Atendida');
@@ -384,10 +385,10 @@ AS
 BEGIN
     UPDATE DIAGNOSTICOS SET IdCita = IDCit, DescDiagnostico = Descripcion
     WHERE IdDiagnostico = ID;
-    DBMS_OUTPUT.PUT_LINE('Diagnostico editado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Diagnostico editado con Ã©xito');
 END;
 
-EXECUTE EditarDiagnostico(2, 3, 'Paciente sin caries, se realizó limpieza con éxito.');
+EXECUTE EditarDiagnostico(2, 3, 'Paciente sin caries, se realizÃ³ limpieza con Ã©xito.');
 
 
 --Medicamentos
@@ -399,7 +400,7 @@ AS
 BEGIN
     UPDATE MEDICAMENTOS SET NomMedicamento = Nombre, DescMedicamento = Descripcion, CostoMedicamento = Costo
     WHERE IdMedicamento = ID;
-    DBMS_OUTPUT.PUT_LINE('Medicamento editado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Medicamento editado con Ã©xito');
 END;
 
 EXECUTE EditarMedicamento(3, 'Ibuprofeno 400mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 420);
@@ -414,7 +415,7 @@ AS
 BEGIN
     UPDATE RECETAS SET IdDiagnostico = IDDiag, IdMedicamento = IDMed, Cantidad = Cant
     WHERE IdReceta = ID;
-    DBMS_OUTPUT.PUT_LINE('Receta editada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Receta editada con Ã©xito');
 END;
 
 EXECUTE EditarReceta(2, 2, 3, 4);
@@ -430,7 +431,7 @@ AS
 BEGIN
     UPDATE FACTURAS SET IdCita = IDCit, IdReceta = IDRec, CostoAdicional = CostoAd, Total = Tot
     WHERE IdFactura = ID;
-    DBMS_OUTPUT.PUT_LINE('Factura editada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Factura editada con Ã©xito');
 END;
 
 EXECUTE EditarFactura(2, 3, 2, 27000, 27850);
@@ -443,7 +444,7 @@ AS
 BEGIN
     DELETE FROM PACIENTES
     WHERE IdPaciente = ID;
-    DBMS_OUTPUT.PUT_LINE('Paciente eliminado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Paciente eliminado con Ã©xito');
 END;
 
 EXECUTE EliminarPaciente();
@@ -455,7 +456,7 @@ AS
 BEGIN
     DELETE FROM EMPLEADOS
     WHERE IdEmpleado = ID;
-    DBMS_OUTPUT.PUT_LINE('Empleado eliminado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Empleado eliminado con Ã©xito');
 END;
 
 EXECUTE EliminarEmpleado();
@@ -467,7 +468,7 @@ AS
 BEGIN
     DELETE FROM SERVICIOS
     WHERE IdServicio = ID;
-    DBMS_OUTPUT.PUT_LINE('Servicio eliminado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Servicio eliminado con Ã©xito');
 END;
 
 EXECUTE EliminarServicio();
@@ -479,7 +480,7 @@ AS
 BEGIN
     DELETE FROM CITAS
     WHERE IdCita = ID;
-    DBMS_OUTPUT.PUT_LINE('Cita eliminida con éxito');
+    DBMS_OUTPUT.PUT_LINE('Cita eliminida con Ã©xito');
 END;
 
 EXECUTE EliminarCita();
@@ -491,7 +492,7 @@ AS
 BEGIN
     DELETE FROM DIAGNOSTICOS 
     WHERE IdDiagnostico = ID;
-    DBMS_OUTPUT.PUT_LINE('Diagnostico eliminado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Diagnostico eliminado con Ã©xito');
 END;
 
 EXECUTE EliminarDiagnostico();
@@ -503,7 +504,7 @@ AS
 BEGIN
     DELETE FROM MEDICAMENTOS
     WHERE IdMedicamento = ID;
-    DBMS_OUTPUT.PUT_LINE('Medicamento eliminado con éxito');
+    DBMS_OUTPUT.PUT_LINE('Medicamento eliminado con Ã©xito');
 END;
 
 EXECUTE EliminarMedicamento();
@@ -515,11 +516,10 @@ AS
 BEGIN
     DELETE FROM RECETAS 
     WHERE IdReceta = ID;
-    DBMS_OUTPUT.PUT_LINE('Receta eliminada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Receta eliminada con Ã©xito');
 END;
 
 EXECUTE EliminarReceta();
-
 
 --Facturas
 CREATE OR REPLACE PROCEDURE EliminarFactura(ID IN NUMBER)
@@ -527,13 +527,13 @@ AS
 BEGIN
     DELETE FROM FACTURAS
     WHERE IdFactura = ID;
-    DBMS_OUTPUT.PUT_LINE('Factura eliminada con éxito');
+    DBMS_OUTPUT.PUT_LINE('Factura eliminada con Ã©xito');
 END;
 
 EXECUTE EliminarFactura();
 
 
-------------------------------CREACIÓN DE VISTAS--------------------------------
+------------------------------CREACIÃ“N DE VISTAS--------------------------------
 
 --Vista de empleados
 
@@ -595,4 +595,42 @@ C.IDEMPLEADO=E.IDEMPLEADO;
 
 CREATE OR REPLACE VIEW VistaContacto AS
 SELECT IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE
-FROM CONTACTO;
+FROM CONTACTO
+ORDER BY IDCONTACTO ASC;
+
+--Vista de servicios 
+
+CREATE OR REPLACE VIEW VistaServicios AS
+SELECT IDSERVICIO, NOMSERVICIO, DESCSERVICIO
+FROM SERVICIOS 
+ORDER BY IDSERVICIO ASC;
+
+CREATE OR REPLACE VIEW VistaMedicamentos AS
+SELECT IDMEDICAMENTO, NOMMEDICAMENTO, DESCMEDICAMENTO, COSTOMEDICAMENTO
+FROM MEDICAMENTOS 
+ORDER BY IDMEDICAMENTO ASC;
+
+
+
+--Vista Facturas
+CREATE OR REPLACE VIEW VistaFacturas AS
+SELECT
+    f.idFactura,
+    c.idCita,
+    p.NomPaciente || ' ' || p.ApellidoPaciente AS "nompaciente",
+    s.NomServicio AS "nomservicio",
+    m.NomMedicamento AS "nommedicamento",
+    f.CostoAdicional AS "costoadicional",
+    (f.CostoAdicional + m.CostoMedicamento) AS "total"
+FROM
+    FACTURAS f
+    JOIN CITAS c ON f.IdCita = c.IdCita
+    JOIN PACIENTES p ON c.IdPaciente = p.IdPaciente
+    JOIN SERVICIOS s ON c.IdServicio = s.IdServicio
+    JOIN RECETAS r ON f.IdReceta = r.IdReceta
+    JOIN MEDICAMENTOS m ON r.IdMedicamento = m.IdMedicamento
+ORDER BY IDFACTURA ASC;
+
+
+
+    
