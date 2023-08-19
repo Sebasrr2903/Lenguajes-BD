@@ -1,5 +1,6 @@
 <?php
 include_once 'generales.php';
+include_once __DIR__ . '\..\Controller\ContactoController.php';
 ?>
 
 
@@ -54,11 +55,20 @@ include_once 'generales.php';
         </div>
         <div class="col-md-6">
           <div class="contact_box">
-            <h1 class="book_text">Reservar cita</h1>
+            <h1 class="book_text">Contacto</h1>
+            <form action="" method="post">
             <input type="text" class="Email_text" placeholder="Nombre" name="Nombre">
             <input type="text" class="Email_text" placeholder="Apellido" name="Apellido">
-            <textarea class="massage-bt" placeholder="Mensaje" rows="5" id="comment" name="Mensaje"></textarea>
-            <div class="send_bt"><a href="#">ENVIAR</a></div>
+            <input type="tel" class="Email_text" placeholder="Telefono" name="Telefono">
+            <textarea class="Email_text" name="Mensaje" placeholder="Escribe Aqui"></textarea>
+            <!-- <input style="height: 150px;" type="text" class="Email_text" placeholder="Escribe aqui" name="Mensaje">-->
+            <!--<div class="send_bt"><a href="#">ENVIAR</a></div>-->
+            <div style="text-align: center; padding: 10px;">
+                <button type="submit" class="btn btn-outline-info btn-lg px-5"
+                style="background-color: #1becde ; padding: 5px 15px; margin-top: 20px; border-radius: 0px;"
+                name="agregarContacto"><a style="color: white;">ENVIAR</a></button>
+            </form>
+           </div>
           </div>
         </div>
       </div>

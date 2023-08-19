@@ -108,6 +108,14 @@ include_once 'generales.php';
                   </div>
                </a>
             </div> <!-- fin  factura-->
+            <div class="col-lg-4 col-sm-6">
+               <a href="contactos.php">
+                  <div class="box_main">
+                     <div class="icon_1"><img style="height: 100px;" src="images/icons8-chat-bubble-90.png"></div>
+                     <h4 class="daily_text_1">Contacto</h4>
+                  </div>
+               </a>
+            </div> <!-- fin contacto -->
          </div> <!-- fin row 3-->
 
          

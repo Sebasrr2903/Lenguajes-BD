@@ -163,7 +163,13 @@ INSERT INTO FACTURAS(IdCita, IdReceta, CostoAdicional, Total)
 
 SELECT * FROM FACTURAS;
 
-
+--Contacto
+CREATE TABLE CONTACTO(
+            IdContacto NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY, --PK
+            Nombre VARCHAR2(40),
+            Apellido VARCHAR2(40),
+            Telefono NUMBER,
+            Mensaje VARCHAR2(250));
 
 -------------------------------CREACIÓN DE SP-----------------------------------
 --Comando para el correcto funcinamiento de bloques PL/SQL y SP
@@ -287,6 +293,20 @@ BEGIN
 END;
 
 EXECUTE AgregarFactura(3, 2, 25000, 25850);
+
+--Contacto
+CREATE OR REPLACE PROCEDURE AgregarContacto(Nombre IN VARCHAR2,                             
+                                           Apellido IN VARCHAR2,
+                                           Telefono IN NUMBER,
+                                           Mensaje IN VARCHAR2)
+AS
+BEGIN
+    INSERT INTO CONTACTO(Nombre, Apellido, Telefono, Mensaje)
+        VALUES(Nombre, Apellido, Telefono, Mensaje);
+    DBMS_OUTPUT.PUT_LINE('Contacto agregada con éxito');
+END;
+
+EXECUTE AgregarContacto('Tannya','Granados',25557777);
 
 
 --SP para editar
@@ -571,4 +591,8 @@ D.IDCITA=C.IDCITA JOIN PACIENTES P ON
 C.IDPACIENTE=P.IDPACIENTE JOIN EMPLEADOS E ON
 C.IDEMPLEADO=E.IDEMPLEADO;
 
+--Vista de Contacto
 
+CREATE OR REPLACE VIEW VistaContacto AS
+SELECT IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE
+FROM CONTACTO;
