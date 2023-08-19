@@ -1,22 +1,25 @@
-<?php 
+<?php
 
 function ListarServicio()
 {
-  require_once('ConnBD.php');
-  $conex = new Conexion();
-  $getConection = $conex->Conectar();
-  $stmt = $getConection->prepare("SELECT * FROM SERVICIOS");
-  $stmt->execute();
-  return $stmt;
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+    $getConection = $conex->Conectar();
+    $stmt = $getConection->prepare("SELECT * FROM SERVICIOS");
+    $stmt->execute();
+    return $stmt;
 }
 
 function AgregarServicioModel($IDServicio, $Nombre, $Descripcion)
 {
     require_once('ConnBD.php');
     $conex = new Conexion();
-    
+
     try {
         $getConection = $conex->Conectar();
+        $Nombre = utf8_decode($Nombre);
+        $Descripcion = utf8_decode($Descripcion);
+
         $sentencia = $getConection->prepare("BEGIN AgregarServicio(:IDServicio, :Nombre, :Descripcion); END;");
         $sentencia->bindParam(':IDServicio', $IDServicio); // Cambio de variable aquí
         $sentencia->bindParam(':Nombre', $Nombre); // Cambio de variable aquí
@@ -38,6 +41,8 @@ function EditarServicioModel($ID, $Nombre, $Descripcion)
 
     try {
         $getConection = $conex->Conectar();
+        $Nombre = utf8_decode($Nombre);
+        $Descripcion = utf8_decode($Descripcion);
         $sentencia = $getConection->prepare("BEGIN EditarServicio(:ID,:Nombre,:Descripcion); END;");
         $sentencia->bindParam(':ID', $ID);
         $sentencia->bindParam(':Nombre', $Nombre);

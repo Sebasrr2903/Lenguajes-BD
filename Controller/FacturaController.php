@@ -10,7 +10,7 @@ function FacturaLista()
     echo '<tr>';
     echo '<td>' . $row["idfactura"] . '</td>';
     echo '<td>' . $row["idcita"] . '</td>';
-    echo '<td>' .$row["nompaciente"] . '</td>';
+    echo '<td>' . utf8_encode($row["nompaciente"]) . '</td>';
     echo '<td>' .utf8_encode($row["nomservicio"]) . '</td>';
     echo '<td>' . $row["nommedicamento"] . '</td>';
     echo '<td>' . $row["costoadicional"] . '</td>';

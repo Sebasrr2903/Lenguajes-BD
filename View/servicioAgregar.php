@@ -48,7 +48,7 @@ include_once __DIR__ . '\..\Controller\ServiciosController.php';
                   </div>
                   <div class="icon_main">
                      <div class="icon_7"><img src="images/icon-6.png"></div>
-                     <h4 class="diabetes_text">Dele en "Confirmar" si realmente desea agregarlo</h4>
+                     <h4 class="diabetes_text">Presiona en "Confirmar" si realmente desea agregarlo</h4>
                   </div>
                </div>
                <div class="col-md-6">

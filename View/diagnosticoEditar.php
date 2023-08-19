@@ -75,7 +75,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         <input type="text" class="Email_text" placeholder="Id cita" name="idcita"
                            value="<?php echo $idCita ?>">
                         <input type="text" class="Email_text" placeholder="Descripcion" name="descdiag"
-                           value="<?php echo $Diagnostico ?>">
+                           value="<?php echo utf8_encode($Diagnostico) ?>">
                            <div style="text-align: center; padding: 15px;">
                            <button type="reset" class="btn btn-outline-info btn-lg px-5"
                               style="background-color: grey ; padding: 5px 15px; margin-top: 10px; margin:15px;"><a
