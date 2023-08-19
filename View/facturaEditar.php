@@ -16,7 +16,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
    $IdCita = $row['idcita'];
    $IdReceta = $row['idreceta'];
    $CostoAdicional = $row['costoadicional'];
-   $Total = $row['total'];
 
 }
 
@@ -81,8 +80,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                            value="<?php echo $IdReceta ?>">
                         <input type="text" class="Email_text" placeholder="Costo Adicional" name="CostoAdicional"
                            value="<?php echo $CostoAdicional ?>">
-                        <input type="text" class="Email_text" placeholder="Total" name="Total"
-                           value="<?php echo $Total ?>">
                            <div style="text-align: center; padding: 15px;">
                            <button type="reset" class="btn btn-outline-info btn-lg px-5"
                               style="background-color: grey ; padding: 5px 15px; margin-top: 10px; margin:15px;"><a

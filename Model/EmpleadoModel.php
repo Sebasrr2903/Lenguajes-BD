@@ -19,6 +19,12 @@ function AgregarEmpleadoModel($NombreEmp, $ApellidoEmp, $CedulaEmp, $PuestoEmp, 
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
+
+    $NombreEmp = utf8_decode($NombreEmp);
+    $ApellidoEmp = utf8_decode($ApellidoEmp);
+    $PuestoEmp = utf8_decode($PuestoEmp);
+
+    $nombreEmp = utf8_decode($NombreEmp);
     $sentencia = $getConection->prepare("BEGIN AgregarEmpleado(:Nombre, :Apellido, :Cedula, :Rol, :Telefono, :Correo); END;");
     $sentencia->bindParam(':Nombre',$NombreEmp);
     $sentencia->bindParam(':Apellido',$ApellidoEmp);
@@ -37,6 +43,10 @@ function EditarEmpleadoModel($Id, $NombreEmp, $ApellidoEmp,$CedulaEmp, $PuestoEm
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
+    $NombreEmp = utf8_decode($NombreEmp);
+    $ApellidoEmp = utf8_decode($ApellidoEmp);
+    $PuestoEmp = utf8_decode($PuestoEmp);
+    
     $sentencia = $getConection->prepare("BEGIN EditarEmpleado(:ID, :Nombre, :Apellido, :Cedula, :Rol, :Telefono, :Correo ); END;");
     $sentencia->bindParam(':ID', $Id);
     $sentencia->bindParam(':Nombre',$NombreEmp);

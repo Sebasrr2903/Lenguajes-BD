@@ -1,6 +1,6 @@
 <?php
 include_once 'generales.php';
-include_once __DIR__ . '\..\Controller\RecetasController.php';
+include_once __DIR__ . '\..\Controller\ServiciosController.php';
 include_once __DIR__ . '/../Model/ConnBD.php';
 
 $conex = new Conexion();
@@ -74,11 +74,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 <input type="hidden" value="<?php echo $idServicios ?>" name="ID">
 
                                 <input type="text" class="Email_text" placeholder="Nombre del Servicio" name="Nombre"
-                                    value="<?php echo $idpaciente ?>">
+                                    value="<?php echo utf8_encode($idpaciente) ?>">
                                 <input type="text" class="Email_text" placeholder="Descripcion" name="Descri"
-                                    value="<?php echo $idempleado ?>">
-                               
-                    
+                                    value="<?php echo utf8_encode($idempleado) ?>">
+
+
                                 <div style="text-align: center; padding: 15px;">
                                     <button type="reset" class="btn btn-outline-info btn-lg px-5"
                                         style="background-color: grey ; padding: 5px 15px; margin-top: 10px; margin:15px;"><a
