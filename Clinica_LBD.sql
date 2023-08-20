@@ -173,35 +173,42 @@ CREATE TABLE CONTACTO(
             
 --Reportes de acciones
 CREATE TABLE REPORTECITAS(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));
             
 CREATE TABLE REPORTEDIAGNOSTICOS(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));
                       
 CREATE TABLE REPORTEFACTURAS(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));
             
 CREATE TABLE REPORTEPACIENTES(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));
  
 CREATE TABLE REPORTERECETAS(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));           
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));           
 
 CREATE TABLE REPORTEMEDICAMENTOS(
-            FECHA DATE, 
-            USUARIO VARCHAR2(60),
-            ACCION VARCHAR2(20));
-            
+            Fecha DATE, 
+            Usuario VARCHAR2(60),
+            Accion VARCHAR2(20));
+
+--Errores
+CREATE TABLE REPORTEERRORES(
+                Fecha DATE,
+                Procedencia VARCHAR2(200),
+                CodigoError NUMBER,
+                MensajeError VARCHAR2(500));
+
             
 -------------------------------CREACION DE SP-----------------------------------
 --Comando para el correcto funcinamiento de bloques PL/SQL y SP
@@ -215,10 +222,33 @@ CREATE OR REPLACE PROCEDURE AgregarPaciente(Nombre IN VARCHAR2,
                                             Telefono IN NUMBER,
                                             Correo IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO PACIENTES(NomPaciente, ApellidoPaciente, CedulaPaciente, TelefonoPaciente, CorreoPaciente)
         VALUES(Nombre, Apellido, Cedula, Telefono, Correo);
     DBMS_OUTPUT.PUT_LINE('Paciente agregado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarPaciente('Fernando', 'Perez', 55555555, 51515151, 'fernando@paciente.com');
@@ -232,10 +262,33 @@ CREATE OR REPLACE PROCEDURE AgregarEmpleado(Nombre IN VARCHAR2,
                                             Telefono IN NUMBER,
                                             Correo IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO EMPLEADOS(NomEmpleado, ApellidoEmpleado, CedulaEmpleado, RolEmpleado, TelefonoEmpleado, CorreoEmpleado)
     VALUES(Nombre, Apellido, Cedula, Rol, Telefono, Correo);
     DBMS_OUTPUT.PUT_LINE('Empleado agregado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarEmpleado('Jose', 'Alpizar', 99999999, 'Doctor', 91919191, 'jose@empleado.com');
@@ -246,10 +299,33 @@ CREATE OR REPLACE PROCEDURE AgregarServicio(IDServicio IN NUMBER,
                                             Nombre IN VARCHAR2,
                                             Descripcion IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
         VALUES(IDServicio, Nombre, Descripcion);
     DBMS_OUTPUT.PUT_LINE('Servicio agregado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarServicio(300, 'Limpieza bucal', 'Limpieza profunda de los dientes y muelas.');
@@ -262,10 +338,33 @@ CREATE OR REPLACE PROCEDURE AgregarCita(IDPaciente IN NUMBER,
                                         Fecha IN VARCHAR2, --Luego se convierte a tipo date
                                         Estado IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO CITAS(IdPaciente, IdEmpleado, IdServicio, FechaCita, EstadoCita)
         VALUES(IDPaciente, IDEmpleado, IDServicio, TO_DATE(Fecha, 'DD/MM/YY'), Estado);
     DBMS_OUTPUT.PUT_LINE('Cita agregada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarCita(3, 3, 300, '02/06/23', 'Atendida');
@@ -275,13 +374,36 @@ EXECUTE AgregarCita(3, 3, 300, '02/06/23', 'Atendida');
 CREATE OR REPLACE PROCEDURE AgregarDiagnostico(IDCita IN NUMBER,
                                                Descripcion IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO DIAGNOSTICOS(IdCita, DescDiagnostico)
         VALUES(IDCita, Descripcion);
     DBMS_OUTPUT.PUT_LINE('Diagnostico agregado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
-EXECUTE AgregarDiagnostico(3, 'El paciente no tiene caries, se realizÃ³ limpieza.');
+EXECUTE AgregarDiagnostico(3, 'El paciente no tiene caries, se realiza limpieza.');
 
 
 --Medicamentos
@@ -289,10 +411,33 @@ CREATE OR REPLACE PROCEDURE AgregarMedicamento(Nombre IN VARCHAR2,
                                                Descripcion IN VARCHAR2,
                                                Costo IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO MEDICAMENTOS(NomMedicamento, DescMedicamento, CostoMedicamento)
         VALUES(Nombre, Descripcion, Costo);
     DBMS_OUTPUT.PUT_LINE('Medicamento agregado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarMedicamento('Penicilína 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
@@ -302,10 +447,33 @@ CREATE OR REPLACE PROCEDURE AgregarRecetas(IDDiagnostico IN NUMBER,
                                            IDMedicamento IN NUMBER,
                                            Cant IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO RECETAS(IdDiagnostico, IdMedicamento, Cantidad)
         VALUES(IDDiagnostico, IDMedicamento, Cant);
     DBMS_OUTPUT.PUT_LINE('Receta agregada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarRecetas', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarRecetas', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarRecetas', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarRecetas', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarRecetas(2, 3, 2);
@@ -316,10 +484,33 @@ CREATE OR REPLACE PROCEDURE AgregarFactura(IDCita IN NUMBER,
                                            IDReceta IN NUMBER,
                                            CostoAd IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO FACTURAS(IdCita, IdReceta, CostoAdicional)
         VALUES(IDCita, IDReceta, CostoAd);
     DBMS_OUTPUT.PUT_LINE('Factura agregada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarFactura(3, 2, 25000);
@@ -330,10 +521,33 @@ CREATE OR REPLACE PROCEDURE AgregarContacto(Nombre IN VARCHAR2,
                                            Telefono IN NUMBER,
                                            Mensaje IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     INSERT INTO CONTACTO(Nombre, Apellido, Telefono, Mensaje)
         VALUES(Nombre, Apellido, Telefono, Mensaje);
     DBMS_OUTPUT.PUT_LINE('Contacto agregada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE AgregarContacto('Tannya','Granados',25557777, 'hola');
@@ -348,13 +562,36 @@ CREATE OR REPLACE PROCEDURE EditarPaciente(ID IN NUMBER,
                                            Telefono IN NUMBER,
                                            Correo IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE PACIENTES SET NomPaciente = Nombre, ApellidoPaciente = Apellido, CedulaPaciente = Cedula, TelefonoPaciente = Telefono, CorreoPaciente = Correo
     WHERE IdPaciente = ID;
     DBMS_OUTPUT.PUT_LINE('Paciente editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
-EXECUTE EditarPaciente(3, 'Fernanda', 'Pérez', 55555555, 99999999, 'fernanda@paciente.com');
+EXECUTE EditarPaciente(3, 'Fernanda', 'Perez', 55555555, 99999999, 'fernanda@paciente.com');
 
 
 
@@ -367,10 +604,33 @@ CREATE OR REPLACE PROCEDURE EditarEmpleado(ID IN NUMBER,
                                            Telefono IN NUMBER,
                                            Correo IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE EMPLEADOS SET NomEmpleado = Nombre, ApellidoEmpleado = Apellido, CedulaEmpleado = Cedula,RolEmpleado = Rol, TelefonoEmpleado = Telefono, CorreoEmpleado = Correo
     WHERE IdEmpleado = ID;
     DBMS_OUTPUT.PUT_LINE('Empleado editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarEmpleado(3,'Juan', 'Alpizar', 99999911, 'Doctor', 91919192, 'juan@empleado.com');
@@ -381,13 +641,36 @@ CREATE OR REPLACE PROCEDURE EditarServicio(ID IN NUMBER,
                                            Nombre IN VARCHAR2,
                                            Descripcion IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE SERVICIOS SET NomServicio = Nombre, DescServicio = Descripcion
     WHERE IdServicio = ID;
     DBMS_OUTPUT.PUT_LINE('Servicio editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
-EXECUTE EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presiÃ³n en los dientes.');
+EXECUTE EditarServicio(300, 'Limpieza bucal', 'Limpieza profunda con agua a presion en los dientes.');
 
 
 --Citas
@@ -398,10 +681,33 @@ CREATE OR REPLACE PROCEDURE EditarCita(ID IN NUMBER,
                                        Fecha IN VARCHAR2, --Luego se convierte a tipo date
                                        Estado IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE CITAS SET IdPaciente = IDPa, IdEmpleado = IDEm, IdServicio = IDSer, FechaCita = TO_DATE(Fecha, 'DD/MM/YY'), EstadoCita = Estado
     WHERE IdCita = ID;
     DBMS_OUTPUT.PUT_LINE('Cita editada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarCita(3, 2, 3, 300, '02/06/23', 'Atendida');
@@ -412,10 +718,33 @@ CREATE OR REPLACE PROCEDURE EditarDiagnostico(ID IN NUMBER,
                                               IDCit IN NUMBER,
                                               Descripcion IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE DIAGNOSTICOS SET IdCita = IDCit, DescDiagnostico = Descripcion
     WHERE IdDiagnostico = ID;
     DBMS_OUTPUT.PUT_LINE('Diagnostico editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarDiagnostico(2, 3, 'Paciente sin caries, se realiza limpieza con exito.');
@@ -427,10 +756,33 @@ CREATE OR REPLACE PROCEDURE EditarMedicamento(ID IN NUMBER,
                                               Descripcion IN VARCHAR2,
                                               Costo IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE MEDICAMENTOS SET NomMedicamento = Nombre, DescMedicamento = Descripcion, CostoMedicamento = Costo
     WHERE IdMedicamento = ID;
     DBMS_OUTPUT.PUT_LINE('Medicamento editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarMedicamento(3, 'Ibuprofeno 400mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 420);
@@ -442,10 +794,33 @@ CREATE OR REPLACE PROCEDURE EditarReceta(ID IN NUMBER,
                                          IDMed IN NUMBER,
                                          Cant IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE RECETAS SET IdDiagnostico = IDDiag, IdMedicamento = IDMed, Cantidad = Cant
     WHERE IdReceta = ID;
     DBMS_OUTPUT.PUT_LINE('Receta editada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarReceta(2, 2, 3, 4);
@@ -458,10 +833,33 @@ CREATE OR REPLACE PROCEDURE EditarFactura(ID IN NUMBER,
                                           CostoAd IN NUMBER,
                                           Tot IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE FACTURAS SET IdCita = IDCit, IdReceta = IDRec, CostoAdicional = CostoAd, Total = Tot
     WHERE IdFactura = ID;
     DBMS_OUTPUT.PUT_LINE('Factura editada con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarFactura(2, 3, 2, 27000, 27850);
@@ -474,10 +872,33 @@ CREATE OR REPLACE PROCEDURE EditarContacto(ID IN NUMBER,
                                           Tel IN NUMBER,
                                           Mensa IN VARCHAR2)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     UPDATE CONTACTO SET Nombre = Nom, Apellido = Appe, Telefono = Tel, Mensaje = Mensa
     WHERE IdContacto = ID;
     DBMS_OUTPUT.PUT_LINE('Contacto editado con exito');
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EditarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EditarContacto(1, 'Fernando', 'Perez', 1111111, 'Favor venir');
@@ -487,10 +908,28 @@ EXECUTE EditarContacto(1, 'Fernando', 'Perez', 1111111, 'Favor venir');
 --Pacientes
 CREATE OR REPLACE PROCEDURE EliminarPaciente(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM PACIENTES
     WHERE IdPaciente = ID;
     DBMS_OUTPUT.PUT_LINE('Paciente eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarPaciente();
@@ -499,10 +938,28 @@ EXECUTE EliminarPaciente();
 --Empleados
 CREATE OR REPLACE PROCEDURE EliminarEmpleado(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM EMPLEADOS
     WHERE IdEmpleado = ID;
     DBMS_OUTPUT.PUT_LINE('Empleado eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarEmpleado', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarEmpleado();
@@ -511,10 +968,28 @@ EXECUTE EliminarEmpleado();
 --Servicios
 CREATE OR REPLACE PROCEDURE EliminarServicio(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM SERVICIOS
     WHERE IdServicio = ID;
     DBMS_OUTPUT.PUT_LINE('Servicio eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarServicio', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarServicio();
@@ -523,10 +998,28 @@ EXECUTE EliminarServicio();
 --Citas
 CREATE OR REPLACE PROCEDURE EliminarCita(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM CITAS
     WHERE IdCita = ID;
     DBMS_OUTPUT.PUT_LINE('Cita eliminida con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarCita', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarCita();
@@ -535,10 +1028,28 @@ EXECUTE EliminarCita();
 --Diagnosticos
 CREATE OR REPLACE PROCEDURE EliminarDiagnostico(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM DIAGNOSTICOS 
     WHERE IdDiagnostico = ID;
     DBMS_OUTPUT.PUT_LINE('Diagnostico eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarDiagnostico', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarDiagnostico();
@@ -547,10 +1058,28 @@ EXECUTE EliminarDiagnostico();
 --Medicamentos
 CREATE OR REPLACE PROCEDURE EliminarMedicamento(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM MEDICAMENTOS
     WHERE IdMedicamento = ID;
     DBMS_OUTPUT.PUT_LINE('Medicamento eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarMedicamento', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarMedicamento();
@@ -559,10 +1088,28 @@ EXECUTE EliminarMedicamento();
 --Recetas
 CREATE OR REPLACE PROCEDURE EliminarReceta(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM RECETAS 
     WHERE IdReceta = ID;
     DBMS_OUTPUT.PUT_LINE('Receta eliminada con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarReceta', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarReceta();
@@ -570,10 +1117,28 @@ EXECUTE EliminarReceta();
 --Facturas
 CREATE OR REPLACE PROCEDURE EliminarFactura(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM FACTURAS
     WHERE IdFactura = ID;
     DBMS_OUTPUT.PUT_LINE('Factura eliminada con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarFactura', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarFactura();
@@ -581,10 +1146,28 @@ EXECUTE EliminarFactura();
 --Contacto
 CREATE OR REPLACE PROCEDURE EliminarContacto(ID IN NUMBER)
 AS
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN
     DELETE FROM CONTACTO
     WHERE IdContacto = ID;
     DBMS_OUTPUT.PUT_LINE('Contacto eliminado con exito');
+EXCEPTION  
+    WHEN NO_DATA_FOUND THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'EliminarContacto', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
 EXECUTE EliminarContacto();
@@ -768,6 +1351,9 @@ DECLARE
     IMPUESTO NUMBER := 0.07;
     COSTOMEDICAMENTO NUMBER := 0;
     CANTIDAD NUMBER := 0;
+    
+    CodigoError NUMBER;
+    MensajeError VARCHAR2(500);
 BEGIN 
     SELECT M.COSTOMEDICAMENTO, R.CANTIDAD
     INTO COSTOMEDICAMENTO, CANTIDAD
@@ -777,10 +1363,30 @@ BEGIN
     
     COSTOMEDICAMENTO := COSTOMEDICAMENTO * CANTIDAD;
     
-    
     :NEW.TOTAL := :NEW.COSTOADICIONAL + COSTOMEDICAMENTO;
     
     :NEW.TOTAL := :NEW.TOTAL + (:NEW.TOTAL * IMPUESTO);
+EXCEPTION  
+    WHEN VALUE_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN INVALID_NUMBER THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN PROGRAM_ERROR THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
+    WHEN OTHERS THEN
+        CodigoError :=  SQLCODE;
+        MensajeError := SQLERRM;
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END; 
 
 
