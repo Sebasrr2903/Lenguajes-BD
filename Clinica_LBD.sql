@@ -440,7 +440,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
-EXECUTE AgregarMedicamento('Penicilína 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
+EXECUTE AgregarMedicamento('Penicilina 200mg', 'Desinflamatorio empleado para tratar la inflamaciones varias.', 425);
 
 --Recetas
 CREATE OR REPLACE PROCEDURE AgregarRecetas(IDDiagnostico IN NUMBER,                             
@@ -1391,11 +1391,94 @@ END;
 
 
 ----------------------------CREACION DE PAQUETES--------------------------------
+CREATE OR REPLACE PACKAGE PACKPACIENTES
+AS
+    --SP
+    PROCEDURE AgregarPaciente(Nombre IN VARCHAR2, Apellido IN VARCHAR2, Cedula IN NUMBER, Telefono IN NUMBER, Correo IN VARCHAR2);
+    PROCEDURE EditarPaciente(ID IN NUMBER, Nombre IN VARCHAR2, Apellido IN VARCHAR2, Cedula IN NUMBER, Telefono IN NUMBER, Correo IN VARCHAR2);
+    PROCEDURE EliminarPaciente(ID IN NUMBER);
+
+END PACKPACIENTES;
 
 
+CREATE OR REPLACE PACKAGE PACKEMPLEADOS
+AS
+    --SP
+    PROCEDURE AgregarEmpleado(Nombre IN VARCHAR2, Apellido IN VARCHAR2, Cedula IN NUMBER, Rol IN VARCHAR2, Telefono IN NUMBER, Correo IN VARCHAR2);
+    PROCEDURE EditarEmpleado(ID IN NUMBER, Nombre IN VARCHAR2, Apellido IN VARCHAR2, Cedula IN NUMBER, Rol IN VARCHAR2, Telefono IN NUMBER, Correo IN VARCHAR2);
+    PROCEDURE EliminarEmpleado(ID IN NUMBER);
+
+END PACKEMPLEADOS;
 
 
+CREATE OR REPLACE PACKAGE PACKSERVICIOS
+AS
+    --SP
+    PROCEDURE AgregarServicio(IDServicio IN NUMBER, Nombre IN VARCHAR2, Descripcion IN VARCHAR2);
+    PROCEDURE EditarServicio(ID IN NUMBER, Nombre IN VARCHAR2, Descripcion IN VARCHAR2);
+    PROCEDURE EliminarServicio(ID IN NUMBER);
 
+END PACKSERVICIOS;
+
+
+CREATE OR REPLACE PACKAGE PACKCITAS
+AS
+    --SP
+    PROCEDURE AgregarCita(IDPaciente IN NUMBER,  IDEmpleado IN NUMBER, IDServicio IN NUMBER, Fecha IN VARCHAR2, Estado IN VARCHAR2);
+    PROCEDURE EditarCita(ID IN NUMBER, IDPa IN NUMBER, IDEm IN NUMBER, IDSer IN NUMBER, Fecha IN VARCHAR2, Estado IN VARCHAR2);
+    PROCEDURE EliminarCita(ID IN NUMBER);
+
+END PACKCITAS;
+
+
+CREATE OR REPLACE PACKAGE PACKDIAGNOSTICOS
+AS
+    --SP
+    PROCEDURE AgregarDiagnostico(IDCita IN NUMBER, Descripcion IN VARCHAR2);
+    PROCEDURE EditarDiagnostico(ID IN NUMBER, IDCit IN NUMBER, Descripcion IN VARCHAR2);
+    PROCEDURE EliminarDiagnostico(ID IN NUMBER);
+
+END PACKDIAGNOSTICOS;
+
+
+CREATE OR REPLACE PACKAGE PACKMEDICAMENTOS
+AS
+    --SP
+    PROCEDURE AgregarMedicamento(Nombre IN VARCHAR2, Descripcion IN VARCHAR2, Costo IN NUMBER);
+    PROCEDURE EditarMedicamento(ID IN NUMBER, Nombre IN VARCHAR2, Descripcion IN VARCHAR2, Costo IN NUMBER);
+    PROCEDURE EliminarMedicamento(ID IN NUMBER);
+
+END PACKMEDICAMENTOS;
+
+
+CREATE OR REPLACE PACKAGE PACKRECETAS
+AS
+    --SP
+    PROCEDURE AgregarRecetas(IDDiagnostico IN NUMBER, IDMedicamento IN NUMBER, Cant IN NUMBER);
+    PROCEDURE EditarReceta(ID IN NUMBER, IDDiag IN NUMBER, IDMed IN NUMBER, Cant IN NUMBER);
+    PROCEDURE EliminarReceta(ID IN NUMBER);
+
+END PACKRECETAS;
+
+
+CREATE OR REPLACE PACKAGE PACKFACTURAS
+AS
+    --SP
+    PROCEDURE AgregarFactura(IDCita IN NUMBER, IDReceta IN NUMBER, CostoAd IN NUMBER);
+    PROCEDURE EditarFactura(ID IN NUMBER, IDCit IN NUMBER, IDRec IN NUMBER, CostoAd IN NUMBER, Tot IN NUMBER);
+    PROCEDURE EliminarFactura(ID IN NUMBER);
+
+END PACKFACTURAS;
+
+
+CREATE OR REPLACE PACKAGE PACKCONTACTO
+AS
+    --SP
+    PROCEDURE AgregarContacto(Nombre IN VARCHAR2, Apellido IN VARCHAR2, Telefono IN NUMBER, Mensaje IN VARCHAR2);
+    PROCEDURE EditarContacto(ID IN NUMBER, Nom IN VARCHAR2, Appe IN VARCHAR2, Tel IN NUMBER, Mensa IN VARCHAR2);
+    PROCEDURE EliminarContacto(ID IN NUMBER);
+
+END PACKCONTACTO;
 
 
 
