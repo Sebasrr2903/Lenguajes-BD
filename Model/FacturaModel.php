@@ -13,17 +13,16 @@ function ListarFactura()
   return $stmt;
 }
 
-function AgregarFacturaModel($IdCita, $IdReceta, $CostoAdicional, $Total)
+function AgregarFacturaModel($IdCita, $IdReceta, $CostoAdicional)
 {
     require_once('ConnBD.php');
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN AgregarFactura(:IdCita, :IdReceta, :CostoAdicional, :Total); END;");
+    $sentencia = $getConection->prepare("BEGIN AgregarFactura(:IdCita, :IdReceta, :CostoAdicional); END;");
     $sentencia->bindParam(':IdCita',$IdCita);
     $sentencia->bindParam(':IdReceta',$IdReceta);
     $sentencia->bindParam(':CostoAdicional',$CostoAdicional);
-    $sentencia->bindParam(':Total',$Total);
     $sentencia->execute();
 
     return $sentencia;

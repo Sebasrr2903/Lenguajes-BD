@@ -25,9 +25,8 @@ if (isset($_POST["agregarFactura"])) {
   $IdCita = $_POST["IdCita"];
   $IdReceta = $_POST["IdReceta"];
   $CostoAdicional = $_POST["CostoAdicional"];
-  $Total = $_POST["Total"];
 
-  AgregarFacturaModel($IdCita, $IdReceta, $CostoAdicional, $Total);
+  AgregarFacturaModel($IdCita, $IdReceta, $CostoAdicional);
   header("Location: facturas.php");
 }
 
