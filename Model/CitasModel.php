@@ -16,7 +16,7 @@ function AgregarCitaModel( $IdPaciente, $IdEmpleado, $IdServicio, $Fecha, $Estad
     $conex = new Conexion();
   try{
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN AgregarCita(:IDPaciente, :IDEmpleado, :IDServicio, :Fecha, :Estado); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKCITAS.AgregarCita(:IDPaciente, :IDEmpleado, :IDServicio, :Fecha, :Estado); END;");
     $sentencia->bindParam(':IDPaciente',$IdPaciente);
     $sentencia->bindParam(':IDEmpleado', $IdEmpleado);
     $sentencia->bindParam(':IDServicio',$IdServicio);
@@ -37,7 +37,7 @@ function EditarCitaModel($ID, $IdPaciente, $IdEmpleado,$IdServicio,$Fecha,$Estad
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN EditarCita(:ID,:IDPa ,:IDEm ,:IDSer ,:Fecha,:Estado); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKCITAS.EditarCita(:ID,:IDPa ,:IDEm ,:IDSer ,:Fecha,:Estado); END;");
     $sentencia->bindParam(':ID', $ID);
     $sentencia->bindParam(':IDPa',$IdPaciente);
     $sentencia->bindParam(':IDEm',$IdEmpleado);

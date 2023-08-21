@@ -20,7 +20,7 @@ function AgregarServicioModel($IDServicio, $Nombre, $Descripcion)
         $Nombre = utf8_decode($Nombre);
         $Descripcion = utf8_decode($Descripcion);
 
-        $sentencia = $getConection->prepare("BEGIN AgregarServicio(:IDServicio, :Nombre, :Descripcion); END;");
+        $sentencia = $getConection->prepare("BEGIN PACKSERVICIOS.AgregarServicio(:IDServicio, :Nombre, :Descripcion); END;");
         $sentencia->bindParam(':IDServicio', $IDServicio); // Cambio de variable aquí
         $sentencia->bindParam(':Nombre', $Nombre); // Cambio de variable aquí
         $sentencia->bindParam(':Descripcion', $Descripcion); // Cambio de variable aquí
@@ -43,7 +43,7 @@ function EditarServicioModel($ID, $Nombre, $Descripcion)
         $getConection = $conex->Conectar();
         $Nombre = utf8_decode($Nombre);
         $Descripcion = utf8_decode($Descripcion);
-        $sentencia = $getConection->prepare("BEGIN EditarServicio(:ID,:Nombre,:Descripcion); END;");
+        $sentencia = $getConection->prepare("BEGIN PACKSERVICIOS.EditarServicio(:ID,:Nombre,:Descripcion); END;");
         $sentencia->bindParam(':ID', $ID);
         $sentencia->bindParam(':Nombre', $Nombre);
         $sentencia->bindParam(':Descripcion', $Descripcion);

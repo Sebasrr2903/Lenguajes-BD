@@ -18,7 +18,7 @@ function AgregarPacienteModel($nombrePaciente, $apellidoPaciente, $cedulaPacient
     $getConection = $conex->Conectar();
     $nombrePaciente = utf8_decode($nombrePaciente);
     $apellidoPaciente = utf8_decode($apellidoPaciente);
-    $sentencia = $getConection->prepare("BEGIN AgregarPaciente(:Nombre, :Apellido, :Cedula, :Telefono, :Correo); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKPACIENTES.AgregarPaciente(:Nombre, :Apellido, :Cedula, :Telefono, :Correo); END;");
     $sentencia->bindParam(':Nombre',$nombrePaciente);
     $sentencia->bindParam(':Apellido',$apellidoPaciente);
     $sentencia->bindParam(':Cedula',$cedulaPaciente);
@@ -38,7 +38,7 @@ function EditarPacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente,$ce
     $getConection = $conex->Conectar();
     $nombrePaciente = utf8_decode($nombrePaciente);
     $apellidoPaciente = utf8_decode($apellidoPaciente);
-    $sentencia = $getConection->prepare("BEGIN EditarPaciente(:ID, :Nombre, :Apellido, :Cedula, :Telefono, :Correo ); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKPACIENTES.EditarPaciente(:ID, :Nombre, :Apellido, :Cedula, :Telefono, :Correo ); END;");
     $sentencia->bindParam(':ID', $idPaciente);
     $sentencia->bindParam(':Nombre',$nombrePaciente);
     $sentencia->bindParam(':Apellido',$apellidoPaciente);

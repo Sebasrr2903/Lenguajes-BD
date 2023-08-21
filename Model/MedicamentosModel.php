@@ -20,7 +20,7 @@ function AgregarMedicamentoModel($Nombre, $Descripcion, $Costo)
         $Nombre = utf8_decode($Nombre);
         $Descripcion = utf8_decode($Descripcion);
 
-        $sentencia = $getConection->prepare("BEGIN AgregarMedicamento(:Nombre, :Descripcion, :Costo); END;");
+        $sentencia = $getConection->prepare("BEGIN PACKMEDICAMENTOS.AgregarMedicamento(:Nombre, :Descripcion, :Costo); END;");
         $sentencia->bindParam(':Nombre', $Nombre);
         $sentencia->bindParam(':Descripcion', $Descripcion);
         $sentencia->bindParam(':Costo', $Costo);
@@ -42,7 +42,7 @@ function EditarMedicamentoModel($ID, $Nombre, $Descripcion, $Costo)
         $Nombre = utf8_decode($Nombre);
         $Descripcion = utf8_decode($Descripcion);
 
-        $sentencia = $getConection->prepare("BEGIN EditarMedicamento(:ID,:Nombre,:Descripcion,:Costo); END;");
+        $sentencia = $getConection->prepare("BEGIN PACKMEDICAMENTOS.EditarMedicamento(:ID,:Nombre,:Descripcion,:Costo); END;");
         $sentencia->bindParam(':ID', $ID);
         $sentencia->bindParam(':Nombre', $Nombre);
         $sentencia->bindParam(':Descripcion', $Descripcion);
