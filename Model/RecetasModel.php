@@ -37,7 +37,7 @@ function EditarRecetaModel($ID,$IdDiagnostico, $IdMedicamento, $Cantidad){
     $sentencia = $getConection->prepare("BEGIN EditarReceta(:ID,: IDDiag ,:IDMed ,:Cant); END;");
     $sentencia->bindParam(':ID', $ID);
     $sentencia->bindParam(':IDDiag',$IdDiagnostico);
-    $sentencia->bindParam(':IDMed',$ $IdMedicamento);
+    $sentencia->bindParam(':IDMed', $IdMedicamento);
     $sentencia->bindParam(':Cant',$Cantidad);
     $sentencia->execute();
     return $sentencia;

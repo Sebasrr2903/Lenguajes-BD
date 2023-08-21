@@ -10,7 +10,7 @@ $ci=$_GET['id'];
 echo $ci;
 
 try{
-    $sql="delete from servicios where idservicio=$ci" ;
+    $sql="delete from servicios where IdServicio=$ci" ;
     $stmtl= $getConection->prepare($sql);
     $stmtl->execute();
     echo"Se elimino con exito";
