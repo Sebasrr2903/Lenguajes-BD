@@ -19,7 +19,7 @@ function AgregarFacturaModel($IdCita, $IdReceta, $CostoAdicional)
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN AgregarFactura(:IDCita, :IDReceta, :CostoAd); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKFACTURAS.AgregarFactura(:IDCita, :IDReceta, :CostoAd); END;");
     $sentencia->bindParam(':IDCita',$IdCita);
     $sentencia->bindParam(':IDReceta',$IdReceta);
     $sentencia->bindParam(':CostoAd',$CostoAdicional);
