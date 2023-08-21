@@ -5,7 +5,7 @@ function ListarServicio()
     require_once('ConnBD.php');
     $conex = new Conexion();
     $getConection = $conex->Conectar();
-    $stmt = $getConection->prepare("SELECT * FROM VistaServicios");
+    $stmt = $getConection->prepare("SELECT * FROM SERVICIOS");
     $stmt->execute();
     return $stmt;
 }
