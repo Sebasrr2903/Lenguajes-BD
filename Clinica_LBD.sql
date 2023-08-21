@@ -70,11 +70,11 @@ CREATE TABLE SERVICIOS(
 --Servicios basicos como limpiezas, vendajes... se usan los codigos 200...
 --Servicios de odontologia se usan los codigos 300...
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(100, 'Cirugia', 'Procedimiento quirÃºrgico, pueden presentar riesgos o complicaciones, se utiliza anestesia general.');
+    VALUES(100, 'Cirugia', 'Procedimiento quirÃƒÂºrgico, pueden presentar riesgos o complicaciones, se utiliza anestesia general.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(101, 'Cirugia Menor', 'Procedimiento quirÃºrgico simple, sin riesgo o complicaciones, se utiliza anestesia local.');
+    VALUES(101, 'Cirugia Menor', 'Procedimiento quirÃƒÂºrgico simple, sin riesgo o complicaciones, se utiliza anestesia local.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
-    VALUES(201, 'CuraciÃ³n', 'Se realiza una limpieza a profundidad de la zona daÃ±ada por accidente o cirugÃ­a.');
+    VALUES(201, 'CuraciÃƒÂ³n', 'Se realiza una limpieza a profundidad de la zona daÃƒÂ±ada por accidente o cirugÃƒÂ­a.');
 INSERT INTO SERVICIOS(IdServicio, NomServicio, DescServicio)
     VALUES(202, 'Costura', 'Se realiza costura y limpieza de una cortadura que presente el cliente, se aplica anestesia local.');
     
@@ -1501,29 +1501,20 @@ CREATE GLOBAL TEMPORARY TABLE temp_contactos (
     APELLIDO VARCHAR2(255),
     TELEFONO VARCHAR2(20),
     MENSAJE VARCHAR2(1000)
-) ON COMMIT PRESERVE ROWS; -- La tabla se eliminar� al final de la transacci�n
+) ON COMMIT PRESERVE ROWS; -- La tabla se eliminará al final de la transacción
 
 -- Crear el procedimiento almacenado para insertar los resultados en la tabla temporal
-CREATE OR REPLACE PROCEDURE SP_LISTAR_CONTACTOS IS
+CREATE OR REPLACE PROCEDURE SP_LISTAR_CONTACTOS AS
 BEGIN
-    -- Crear la tabla temporal
-    EXECUTE IMMEDIATE 'CREATE GLOBAL TEMPORARY TABLE temp_contactos (
-        IDCONTACTO NUMBER,
-        NOMBRE VARCHAR2(255),
-        APELLIDO VARCHAR2(255),
-        TELEFONO NUMBER,
-        MENSAJE VARCHAR2(1000)
-    ) ON COMMIT PRESERVE ROWS';
 
-    -- Insertar datos en la tabla temporal
     INSERT INTO temp_contactos (IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE)
     SELECT IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE
-    FROM CONTACTO;
-
+    FROM CONTACTO
+    ORDER BY IDCONTACTO ASC;
+    
     COMMIT;
 END SP_LISTAR_CONTACTOS;
 EXEC SP_LISTAR_CONTACTOS();
-SELECT * FROM temp_contactos;
 
 
     
