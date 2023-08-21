@@ -5,8 +5,15 @@ function ListarContactos()
   require_once('ConnBD.php');
   $conex = new Conexion();
   $getConection = $conex->Conectar();
-  $stmt = $getConection->prepare("SELECT * FROM VistaContacto");
+  
+  // Ejecutar el procedimiento almacenado para llenar la tabla temporal
+  $stmt = $getConection->prepare("BEGIN SP_LISTAR_CONTACTOS; END;");
   $stmt->execute();
+  
+  // Ahora, simplemente selecciona los datos de la tabla temporal
+  $stmt = $getConection->prepare("SELECT * FROM temp_contactos");
+  $stmt->execute();
+  
   return $stmt;
 }
 
