@@ -21,7 +21,7 @@ function AgregarDiagnosticoModel($idCita, $Diagnostico)
     $getConection = $conex->Conectar();
     $Diagnostico = utf8_decode($Diagnostico);
     
-    $sentencia = $getConection->prepare("BEGIN AgregarDiagnostico(:IdCita, :Diagnostico); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKDIAGNOSTICOS.AgregarDiagnostico(:IdCita, :Diagnostico); END;");
     $sentencia->bindParam(':IdCita',$idCita);
     $sentencia->bindParam(':Diagnostico',$Diagnostico);
     $sentencia->execute();
@@ -37,7 +37,7 @@ function EditarDiagnosticoModel($Id, $idCita, $Diagnostico)
     $getConection = $conex->Conectar();
     $Diagnostico = utf8_decode($Diagnostico);
 
-    $sentencia = $getConection->prepare("BEGIN EditarDiagnostico(:ID, :IdCita, :Diagnostico); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKDIAGNOSTICOS.EditarDiagnostico(:ID, :IdCita, :Diagnostico); END;");
     $sentencia->bindParam(':ID', $Id);
     $sentencia->bindParam(':IdCita',$idCita);
     $sentencia->bindParam(':Diagnostico',$Diagnostico);

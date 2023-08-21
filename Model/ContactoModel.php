@@ -26,7 +26,7 @@ function AgregarContactoModel( $Nombre, $Apellido, $Telefono, $Mensaje)
     $Nombre = utf8_decode($Nombre);
     $Apellido = utf8_decode($Apellido);
     $Mensaje = utf8_decode($Mensaje);
-    $sentencia = $getConection->prepare("BEGIN AgregarContacto(:Nombre, :Apellido, :Telefono, :Mensaje); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKCONTACTO.AgregarContacto(:Nombre, :Apellido, :Telefono, :Mensaje); END;");
     $sentencia->bindParam(':Nombre',$Nombre);
     $sentencia->bindParam(':Apellido', $Apellido);
     $sentencia->bindParam(':Telefono',$Telefono);

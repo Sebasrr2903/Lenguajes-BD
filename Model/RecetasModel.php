@@ -16,7 +16,7 @@ function AgregarRecetaModel($IdDiagnostico, $IdMedicamento, $Cantidad)
     $conex = new Conexion();
     try {
         $getConection = $conex->Conectar();
-        $sentencia = $getConection->prepare("BEGIN AgregarRecetas(:IDDiagnostico, :IDMedicamento, :Cant); END;");
+        $sentencia = $getConection->prepare("BEGIN PACKRECETAS.AgregarRecetas(:IDDiagnostico, :IDMedicamento, :Cant); END;");
         $sentencia->bindParam(':IDDiagnostico', $IdDiagnostico); 
         $sentencia->bindParam(':IDMedicamento', $IdMedicamento); 
         $sentencia->bindParam(':Cant', $Cantidad);
@@ -34,7 +34,7 @@ function EditarRecetaModel($ID,$IdDiagnostico, $IdMedicamento, $Cantidad){
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN EditarReceta(:ID,: IDDiag ,:IDMed ,:Cant); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKRECETAS.EditarReceta(:ID,: IDDiag ,:IDMed ,:Cant); END;");
     $sentencia->bindParam(':ID', $ID);
     $sentencia->bindParam(':IDDiag',$IdDiagnostico);
     $sentencia->bindParam(':IDMed', $IdMedicamento);
