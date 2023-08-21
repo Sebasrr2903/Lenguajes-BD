@@ -161,7 +161,7 @@ ALTER TABLE FACTURAS ADD CONSTRAINT FK_IDRECETA_FACTURAS FOREIGN KEY (IdReceta) 
 INSERT INTO FACTURAS(IdCita, IdReceta, CostoAdicional, Total)
     VALUES(1, 1, 50000, 58000);
 
-SELECT * FROM FACTURAS;
+
 
 --Contacto
 CREATE TABLE CONTACTO(
@@ -221,7 +221,8 @@ CREATE TABLE USERS(
 
 INSERT INTO USERS(USERNAME, PASSWORD, NAME, LASTNAME, ROLE)
     VALUES ('admin','admin','Admin','Admin','admin');
-    
+
+
 -------------------------------CREACION DE SP-----------------------------------
 --Comando para el correcto funcinamiento de bloques PL/SQL y SP
 SET SERVEROUTPUT ON;
@@ -525,7 +526,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END;
 
-EXECUTE AgregarFactura(3, 2, 25000);
+EXECUTE AgregarFactura(3, 21, 25000);
 
 --Contacto
 CREATE OR REPLACE PROCEDURE AgregarContacto(Nombre IN VARCHAR2,                             
@@ -1491,7 +1492,38 @@ AS
     PROCEDURE EliminarContacto(ID IN NUMBER);
 
 END PACKCONTACTO;
+SELECT * FROM CONTACTO;
 
+
+CREATE GLOBAL TEMPORARY TABLE temp_contactos (
+    IDCONTACTO NUMBER,
+    NOMBRE VARCHAR2(255),
+    APELLIDO VARCHAR2(255),
+    TELEFONO VARCHAR2(20),
+    MENSAJE VARCHAR2(1000)
+) ON COMMIT PRESERVE ROWS; -- La tabla se eliminará al final de la transacción
+
+-- Crear el procedimiento almacenado para insertar los resultados en la tabla temporal
+CREATE OR REPLACE PROCEDURE SP_LISTAR_CONTACTOS IS
+BEGIN
+    -- Crear la tabla temporal
+    EXECUTE IMMEDIATE 'CREATE GLOBAL TEMPORARY TABLE temp_contactos (
+        IDCONTACTO NUMBER,
+        NOMBRE VARCHAR2(255),
+        APELLIDO VARCHAR2(255),
+        TELEFONO NUMBER,
+        MENSAJE VARCHAR2(1000)
+    ) ON COMMIT PRESERVE ROWS';
+
+    -- Insertar datos en la tabla temporal
+    INSERT INTO temp_contactos (IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE)
+    SELECT IDCONTACTO, NOMBRE, APELLIDO, TELEFONO, MENSAJE
+    FROM CONTACTO;
+
+    COMMIT;
+END SP_LISTAR_CONTACTOS;
+EXEC SP_LISTAR_CONTACTOS();
+SELECT * FROM temp_contactos;
 
 
     
