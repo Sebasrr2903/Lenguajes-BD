@@ -52,7 +52,7 @@ function EliminarDiagnosticoModel($Id)
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN EliminarDiagnostico(:ID); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKDIAGNOSTICOS.EliminarDiagnostico(:ID); END;");
     $sentencia->bindParam(':ID', $Id);
     
     $sentencia->execute();

@@ -54,3 +54,18 @@ function EditarMedicamentoModel($ID, $Nombre, $Descripcion, $Costo)
         return false;
     }
 }
+
+
+function EliminarMedicamentoModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKMEDICAMENTOS.EliminarMedicamento(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
+}

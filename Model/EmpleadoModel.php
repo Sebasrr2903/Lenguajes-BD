@@ -60,4 +60,18 @@ function EditarEmpleadoModel($Id, $NombreEmp, $ApellidoEmp,$CedulaEmp, $PuestoEm
     return $sentencia;
 }
 
+function EliminarEmpleadoModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKEMPLEADOS.EliminarEmpleado(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
+}
+
 ?>

@@ -50,4 +50,19 @@ function EditarPacienteModel($idPaciente, $nombrePaciente, $apellidoPaciente,$ce
     return $sentencia;
 }
 
+
+function EliminarPacienteModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKPACIENTES.EliminarPaciente(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
+}
+
 ?>

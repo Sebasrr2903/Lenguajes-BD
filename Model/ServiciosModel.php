@@ -5,7 +5,7 @@ function ListarServicio()
     require_once('ConnBD.php');
     $conex = new Conexion();
     $getConection = $conex->Conectar();
-    $stmt = $getConection->prepare("SELECT * FROM SERVICIOS");
+    $stmt = $getConection->prepare("SELECT * FROM VistaServicios");
     $stmt->execute();
     return $stmt;
 }
@@ -53,4 +53,18 @@ function EditarServicioModel($ID, $Nombre, $Descripcion)
         echo "Error al editar el servicio" . $e->getMessage();
         return false;
     }
+}
+
+function EliminarServicioModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKSERVICIOS.EliminarServicio(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
 }

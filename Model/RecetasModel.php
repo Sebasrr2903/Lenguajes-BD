@@ -42,3 +42,17 @@ function EditarRecetaModel($ID,$IdDiagnostico, $IdMedicamento, $Cantidad){
     $sentencia->execute();
     return $sentencia;
 }
+
+function EliminarRecetaModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKRECETAS.EliminarReceta(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
+}

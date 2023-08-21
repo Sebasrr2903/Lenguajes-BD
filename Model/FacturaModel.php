@@ -34,7 +34,7 @@ function EditarFacturaModel($Id, $IdCita, $IdReceta,$CostoAdicional, $Total)
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN EditarFactura(:ID, :IdCita, :IdReceta, :CostoAdicional, :Total); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKFACTURAS.EditarFactura(:ID, :IdCita, :IdReceta, :CostoAdicional, :Total); END;");
     $sentencia->bindParam(':ID', $Id);
     $sentencia->bindParam(':IdCita',$IdCita);
     $sentencia->bindParam(':IdReceta',$IdReceta);

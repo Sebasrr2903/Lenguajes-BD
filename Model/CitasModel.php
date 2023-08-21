@@ -55,7 +55,7 @@ function EliminarCitaModel($Id)
     $conex = new Conexion();
 
     $getConection = $conex->Conectar();
-    $sentencia = $getConection->prepare("BEGIN EliminarCita(:ID); END;");
+    $sentencia = $getConection->prepare("BEGIN PACKCITAS.EliminarCita(:ID); END;");
     $sentencia->bindParam(':ID', $Id);
     
     $sentencia->execute();
