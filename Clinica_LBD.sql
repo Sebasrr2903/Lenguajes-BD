@@ -209,7 +209,19 @@ CREATE TABLE REPORTEERRORES(
                 CodigoError NUMBER,
                 MensajeError VARCHAR2(500));
 
-            
+--Usuarios
+
+CREATE TABLE USERS(
+  id NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+  username varchar2(100),
+  password varchar2(100),
+  name varchar2(100),
+  lastname varchar2(255),
+  role VARCHAR2(50));
+
+INSERT INTO USERS(USERNAME, PASSWORD, NAME, LASTNAME, ROLE)
+    VALUES ('admin','admin','Admin','Admin','admin');
+    
 -------------------------------CREACION DE SP-----------------------------------
 --Comando para el correcto funcinamiento de bloques PL/SQL y SP
 SET SERVEROUTPUT ON;
