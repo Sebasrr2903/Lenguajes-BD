@@ -45,4 +45,18 @@ function EditarFacturaModel($Id, $IdCita, $IdReceta,$CostoAdicional, $Total)
     return $sentencia;
 }
 
+function EliminarFacturaModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN PACKFACTURAS.EliminarFactura(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+
+    $sentencia->execute();
+
+    return $sentencia;
+}
+
 ?>

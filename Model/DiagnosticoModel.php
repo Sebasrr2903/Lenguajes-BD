@@ -46,4 +46,20 @@ function EditarDiagnosticoModel($Id, $idCita, $Diagnostico)
     return $sentencia;
 }
 
+function EliminarDiagnosticoModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN EliminarDiagnostico(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+    
+    $sentencia->execute();
+
+    return $sentencia;
+}
+
+
+
 ?>

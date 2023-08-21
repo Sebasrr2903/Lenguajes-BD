@@ -47,3 +47,18 @@ function EditarCitaModel($ID, $IdPaciente, $IdEmpleado,$IdServicio,$Fecha,$Estad
     $sentencia->execute();
     return $sentencia;
 }
+
+
+function EliminarCitaModel($Id)
+{
+    require_once('ConnBD.php');
+    $conex = new Conexion();
+
+    $getConection = $conex->Conectar();
+    $sentencia = $getConection->prepare("BEGIN EliminarCita(:ID); END;");
+    $sentencia->bindParam(':ID', $Id);
+    
+    $sentencia->execute();
+
+    return $sentencia;
+}
