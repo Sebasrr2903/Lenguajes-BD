@@ -228,6 +228,7 @@ SET SERVEROUTPUT ON;
 
 --SP para insertar
 --Pacientes
+
 CREATE OR REPLACE PROCEDURE AgregarPaciente(Nombre IN VARCHAR2,
                                             Apellido IN VARCHAR2,
                                             Cedula IN NUMBER,

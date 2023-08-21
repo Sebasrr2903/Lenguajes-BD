@@ -55,7 +55,7 @@ include_once __DIR__ . '\..\Controller\PacienteController.php';
                            <th>Cedula</th>
                            <th>Telefono</th>
                            <th>Correo</th>
-                           <th></th>\
+                           <th></th>
                            <th></th>
 
                         </tr>
