@@ -1382,22 +1382,22 @@ EXCEPTION
     WHEN VALUE_ERROR THEN
         CodigoError :=  SQLCODE;
         MensajeError := SQLERRM;
-        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
     WHEN INVALID_NUMBER THEN
         CodigoError :=  SQLCODE;
         MensajeError := SQLERRM;
-        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
     WHEN PROGRAM_ERROR THEN
         CodigoError :=  SQLCODE;
         MensajeError := SQLERRM;
-        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
     WHEN OTHERS THEN
         CodigoError :=  SQLCODE;
         MensajeError := SQLERRM;
-        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarPaciente', CodigoError, MensajeError);
+        INSERT INTO REPORTEERRORES VALUES(SYSDATE, 'AgregarFactura', CodigoError, MensajeError);
         DBMS_OUTPUT.PUT_LINE('Se ha generado un error.');
 END; 
 
